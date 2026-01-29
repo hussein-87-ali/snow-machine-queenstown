@@ -20,7 +20,6 @@
       min-height: 100vh;
     }
     
-    /* Header */
     header {
       background: linear-gradient(135deg, #5c8a6e, #7ba38a, #a8c5b5);
       padding: 3rem 1.5rem;
@@ -50,14 +49,12 @@
       font-weight: 700;
     }
     
-    /* Main Container */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 2rem 1.5rem;
     }
     
-    /* Intro Section */
     .intro {
       background: #fff;
       border-radius: 16px;
@@ -72,15 +69,20 @@
       margin-bottom: 0.5rem;
     }
     
-    /* View Toggle */
+    .controls {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
     .view-toggle {
       display: flex;
       gap: 0.5rem;
-      margin-bottom: 2rem;
       background: #e8e2d9;
       padding: 0.5rem;
       border-radius: 12px;
-      width: fit-content;
     }
     
     .view-toggle button {
@@ -106,7 +108,24 @@
       background: rgba(92, 138, 110, 0.2);
     }
     
-    /* Section Headers */
+    .reset-btn {
+      padding: 0.75rem 1.25rem;
+      border: 2px solid #d4a5a5;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.9rem;
+      background: #fdf8f8;
+      color: #a85454;
+      transition: all 0.3s ease;
+    }
+    
+    .reset-btn:hover {
+      background: #a85454;
+      color: #fff;
+    }
+    
     .section-header {
       display: flex;
       align-items: center;
@@ -125,7 +144,6 @@
       font-size: 2rem;
     }
     
-    /* Table View */
     .table-view {
       display: none;
       overflow-x: auto;
@@ -156,7 +174,7 @@
     td {
       padding: 1rem;
       border-bottom: 1px solid #e8e2d9;
-      vertical-align: top;
+      vertical-align: middle;
     }
     
     tr:last-child td {
@@ -165,6 +183,14 @@
     
     tr:hover {
       background: #f8f6f3;
+    }
+    
+    tr.top-pick {
+      background: linear-gradient(90deg, #e8f5ed, #f8f6f3);
+    }
+    
+    tr.top-pick td:first-child {
+      border-left: 4px solid #5c8a6e;
     }
     
     .table-tag {
@@ -178,6 +204,23 @@
       margin: 0.15rem;
     }
     
+    .top-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #5c8a6e, #7ba38a);
+      color: #fff;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      margin-left: 0.5rem;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    
     .price-cell {
       font-weight: 700;
       color: #8b7355;
@@ -188,7 +231,12 @@
       font-weight: 600;
     }
     
-    /* Card View */
+    .vote-cell {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
     .card-view {
       display: none;
     }
@@ -199,7 +247,7 @@
     
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
       margin-bottom: 2rem;
     }
@@ -207,10 +255,11 @@
     .card {
       background: #fff;
       border-radius: 20px;
-      padding: 1.75rem;
+      padding: 1.5rem;
       box-shadow: 0 4px 20px rgba(0,0,0,0.06);
       border: 2px solid transparent;
       transition: all 0.3s ease;
+      position: relative;
     }
     
     .card:hover {
@@ -219,86 +268,78 @@
       box-shadow: 0 12px 32px rgba(0,0,0,0.1);
     }
     
+    .card.top-pick {
+      border-color: #5c8a6e;
+      box-shadow: 0 8px 32px rgba(92, 138, 110, 0.25);
+    }
+    
+    .card-badge {
+      position: absolute;
+      top: -10px;
+      right: 16px;
+      background: linear-gradient(135deg, #5c8a6e, #7ba38a);
+      color: #fff;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(92, 138, 110, 0.4);
+    }
+    
     .card-header {
       display: flex;
       align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
     }
     
     .card-emoji {
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
     
     .card h3 {
       color: #3d3a36;
-      font-size: 1.25rem;
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    .card-meta {
+      font-size: 0.85rem;
+      color: #6b6560;
       margin-bottom: 0.5rem;
+    }
+    
+    .card-meta .price-tag {
+      color: #8b7355;
+      font-weight: 700;
+    }
+    
+    .card-meta .walk-tag {
+      color: #5c8a6e;
+      font-weight: 600;
     }
     
     .tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
     
     .tag {
       display: inline-block;
       background: #e8f0eb;
       color: #4a7560;
-      padding: 0.3rem 0.75rem;
+      padding: 0.25rem 0.6rem;
       border-radius: 20px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 700;
     }
     
-    .tag.premium {
-      background: #f5ebe0;
-      color: #8b7355;
-    }
-    
-    .tag.warning {
-      background: #f8e8e8;
-      color: #a85454;
-    }
-    
-    .card-details {
-      color: #5a5652;
-      margin-bottom: 1rem;
-    }
-    
-    .card-details p {
-      margin-bottom: 0.5rem;
-    }
-    
-    .highlight {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: #5c8a6e;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-    
-    .price {
-      background: linear-gradient(135deg, #f5ebe0, #efe5d8);
-      padding: 1rem;
-      border-radius: 12px;
-      margin-top: 1rem;
-    }
-    
-    .price-label {
-      font-size: 0.85rem;
-      color: #8b7355;
-      font-weight: 600;
-    }
-    
-    .price-value {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: #6b5a45;
-    }
+    .tag.budget { background: #e8f0eb; color: #4a7560; }
+    .tag.mid { background: #f5ebe0; color: #8b7355; }
+    .tag.premium { background: #f0e8f5; color: #7b5c8a; }
+    .tag.luxury { background: #f5e8e8; color: #8a5c5c; }
     
     .vote {
       margin-top: 1rem;
@@ -307,41 +348,31 @@
       gap: 0.75rem;
     }
     
-    .vote button {
+    .vote button, table button {
       background: linear-gradient(135deg, #5c8a6e, #7ba38a);
       border: none;
       color: #fff;
-      padding: 0.6rem 1.25rem;
+      padding: 0.5rem 1rem;
       border-radius: 25px;
       cursor: pointer;
       font-family: inherit;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       transition: all 0.3s ease;
     }
     
-    .vote button:hover {
+    .vote button:hover, table button:hover {
       transform: scale(1.05);
       box-shadow: 0 6px 20px rgba(92, 138, 110, 0.4);
     }
     
     .counter {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 800;
       color: #5c8a6e;
+      min-width: 24px;
     }
     
-    /* Avoid Section */
-    .avoid-card {
-      border: 2px dashed #d4a5a5;
-      background: #fdf8f8;
-    }
-    
-    .avoid-card:hover {
-      border-color: #c48a8a;
-    }
-    
-    /* CTA Section */
     .cta {
       background: linear-gradient(135deg, #5c8a6e, #4a7560);
       border-radius: 20px;
@@ -374,7 +405,6 @@
       color: #ffd9a0;
     }
     
-    /* Footer */
     footer {
       text-align: center;
       padding: 2rem;
@@ -382,10 +412,16 @@
       font-weight: 600;
     }
     
-    /* Animations */
+    footer code {
+      background: #e8e2d9;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+    
     @keyframes pop {
       0% { transform: scale(0.8); opacity: 0.6; }
-      50% { transform: scale(1.2); }
+      50% { transform: scale(1.3); }
       100% { transform: scale(1); opacity: 1; }
     }
     
@@ -393,23 +429,30 @@
       animation: pop 0.3s ease-out;
     }
     
-    /* Responsive */
     @media (max-width: 768px) {
       header h1 {
         font-size: 1.75rem;
       }
       
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
       .view-toggle {
-        width: 100%;
         justify-content: center;
       }
       
       table {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
       }
       
       th, td {
-        padding: 0.75rem 0.5rem;
+        padding: 0.6rem 0.4rem;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -417,8 +460,8 @@
 <body>
 
 <header>
-  <h1>🏔️ Snow Machine Queenstown 2026 ⛷️</h1>
-  <p>🏠 Where to Stay • 🚶 Walkable • 👯 Group-friendly • 🚫 No dodgy hotels</p>
+  <h1>❄️ Snow Machine Queenstown 2026 ⛷️</h1>
+  <p>🏠 Where to Stay • 🚶 Walkable • 👯 Group-friendly • 🗳️ Vote for your fave!</p>
 </header>
 
 <div class="dates-banner">
@@ -430,350 +473,25 @@
   <div class="intro">
     <h2>👋 Hey legends!</h2>
     <p>
-      This guide is for everyone heading to <strong>Snow Machine Queenstown 2026</strong>! 
-      The goal: stay central 🎯, walk everywhere 🚶, be close to après-ski 🍻, transport 🚌, ski pickup ⛷️, and still have space to recover 😴.
+      Pick your vibe for <strong>Snow Machine Queenstown 2026</strong>! 🎿
+      Vote for your favourite spots – votes are saved locally so you can screenshot and share! 📸
+      The goal: stay central 🎯, walk everywhere 🚶, après-ski access 🍻, and recover space 😴.
     </p>
   </div>
 
-  <!-- View Toggle -->
-  <div class="view-toggle">
-    <button class="active" onclick="switchView('table')">📊 Table View</button>
-    <button onclick="switchView('cards')">🃏 Card View</button>
+  <div class="controls">
+    <div class="view-toggle">
+      <button class="active" onclick="switchView('table')">📊 Table View</button>
+      <button onclick="switchView('cards')">🃏 Card View</button>
+    </div>
+    <button class="reset-btn" onclick="resetVotes()">🔄 Reset All Votes</button>
   </div>
 
   <!-- ============ TABLE VIEW ============ -->
-  <div class="table-view active" id="table-view">
-    
-    <div class="section-header">
-      <span class="section-emoji">🔥</span>
-      <h2>Best Central Picks (Walk to Everything)</h2>
-    </div>
-    
-    <table>
-      <thead>
-        <tr>
-          <th>🏨 Accommodation</th>
-          <th>📍 Location</th>
-          <th>🚶 Walk to Town</th>
-          <th>👥 Best For</th>
-          <th>💰 Price (pp/week)</th>
-          <th>⭐ Votes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>🌟 Ramada Suites</strong><br><span class="table-tag">Ultra Central</span></td>
-          <td>Queenstown Central</td>
-          <td class="walk-time">⚡ 2 min</td>
-          <td>Couples, Small groups</td>
-          <td class="price-cell">$650–$850</td>
-          <td><button onclick="vote('ramada')">Vote</button> <span id="ramada-count" class="counter">0</span></td>
-        </tr>
-        <tr>
-          <td><strong>🏡 Queenstown House</strong><br><span class="table-tag">Group House</span></td>
-          <td>Near Queenstown Gardens</td>
-          <td class="walk-time">🚶 5–8 min</td>
-          <td>Big groups (6-10)</td>
-          <td class="price-cell">$550–$750</td>
-          <td><button onclick="vote('qthouse')">Vote</button> <span id="qthouse-count" class="counter">0</span></td>
-        </tr>
-        <tr>
-          <td><strong>🏢 LQ Apartments</strong><br><span class="table-tag">Modern</span></td>
-          <td>Lake Wakatipu views</td>
-          <td class="walk-time">🚶 6 min</td>
-          <td>Couples, Friends</td>
-          <td class="price-cell">$700–$900</td>
-          <td><button onclick="vote('lq')">Vote</button> <span id="lq-count" class="counter">0</span></td>
-        </tr>
-        <tr>
-          <td><strong>🛋️ The Beacon Apartments</strong><br><span class="table-tag">Spacious</span></td>
-          <td>Central Queenstown</td>
-          <td class="walk-time">🚶 10 min</td>
-          <td>Groups wanting space</td>
-          <td class="price-cell">$600–$800</td>
-          <td><button onclick="vote('beacon')">Vote</button> <span id="beacon-count" class="counter">0</span></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="section-header">
-      <span class="section-emoji">✨</span>
-      <h2>Premium / Scenic Options</h2>
-    </div>
-    
-    <table>
-      <thead>
-        <tr>
-          <th>🏨 Accommodation</th>
-          <th>📍 Location</th>
-          <th>🚶 Walk to Town</th>
-          <th>👥 Best For</th>
-          <th>💰 Price (pp/week)</th>
-          <th>⭐ Votes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>🌲 Four Seasons Resort</strong><br><span class="table-tag">Luxury</span><span class="table-tag">Ski-in vibes</span></td>
-          <td>Near ski access</td>
-          <td class="walk-time">🚶 12 min</td>
-          <td>Treat yourself crew</td>
-          <td class="price-cell">$950–$1,150</td>
-          <td><button onclick="vote('fourseasons')">Vote</button> <span id="fourseasons-count" class="counter">0</span></td>
-        </tr>
-        <tr>
-          <td><strong>🌊 Hilton Queenstown</strong><br><span class="table-tag">Lakefront</span><span class="table-tag">Resort</span></td>
-          <td>Kawarau Village</td>
-          <td class="walk-time">🚌 Bus needed</td>
-          <td>Luxury lovers</td>
-          <td class="price-cell">$900–$1,100</td>
-          <td><button onclick="vote('hilton')">Vote</button> <span id="hilton-count" class="counter">0</span></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="section-header">
-      <span class="section-emoji">⚠️</span>
-      <h2>What We're Avoiding</h2>
-    </div>
-    
-    <table>
-      <thead>
-        <tr>
-          <th>🏨 Place</th>
-          <th>😬 Why We're Skipping It</th>
-          <th>🚶 Distance</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>❌ Fernhill Motels</strong></td>
-          <td>Way too far, steep hill, need car/bus every time 😩</td>
-          <td class="walk-time">🚌 25+ min walk uphill</td>
-        </tr>
-        <tr>
-          <td><strong>❌ Frankton Accommodations</strong></td>
-          <td>Near airport but middle of nowhere for nightlife 🛫</td>
-          <td class="walk-time">🚌 Bus required</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <div class="table-view active" id="table-view"></div>
 
   <!-- ============ CARD VIEW ============ -->
-  <div class="card-view" id="card-view">
-    
-    <div class="section-header">
-      <span class="section-emoji">🔥</span>
-      <h2>Best Central Picks (Walk to Everything)</h2>
-    </div>
-    
-    <div class="grid">
-      <div class="card">
-        <div class="card-header">
-          <span class="card-emoji">🌟</span>
-          <div>
-            <h3>Ramada Suites Queenstown</h3>
-            <div class="tags">
-              <span class="tag">⚡ Ultra Central</span>
-              <span class="tag">🛏️ Modern Suites</span>
-            </div>
-          </div>
-        </div>
-        <div class="highlight">✅ 2 min walk to town centre!</div>
-        <div class="card-details">
-          <p>🎯 Right in the heart of everything. Roll out of bed and you're basically at the bars, restaurants, and ski bus pickup.</p>
-          <p>🏠 Perfect for couples or small groups wanting comfort + convenience.</p>
-        </div>
-        <div class="price">
-          <div class="price-label">💰 Estimated per person (quad share, 7 nights)</div>
-          <div class="price-value">$650–$850 NZD</div>
-        </div>
-        <div class="vote">
-          <button onclick="vote('ramada')">Vote ⭐</button>
-          <span id="ramada-count2" class="counter">0</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="card-emoji">🏡</span>
-          <div>
-            <h3>Queenstown House B&B</h3>
-            <div class="tags">
-              <span class="tag">👯 Group Friendly</span>
-              <span class="tag">🌳 Gardens Area</span>
-            </div>
-          </div>
-        </div>
-        <div class="highlight">✅ 5–8 min walk to town</div>
-        <div class="card-details">
-          <p>🏠 Beautiful house vibes near Queenstown Gardens. Perfect balance of space + location.</p>
-          <p>👥 Ideal for larger groups (6-10) wanting that house party energy while still being walkable to everything.</p>
-        </div>
-        <div class="price">
-          <div class="price-label">💰 Estimated per person (group share, 7 nights)</div>
-          <div class="price-value">$550–$750 NZD</div>
-        </div>
-        <div class="vote">
-          <button onclick="vote('qthouse')">Vote ⭐</button>
-          <span id="qthouse-count2" class="counter">0</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="card-emoji">🏢</span>
-          <div>
-            <h3>LQ Apartments</h3>
-            <div class="tags">
-              <span class="tag">🌊 Lake Views</span>
-              <span class="tag">✨ Modern</span>
-            </div>
-          </div>
-        </div>
-        <div class="highlight">✅ 6 min walk + scenic route</div>
-        <div class="card-details">
-          <p>😍 Modern apartments with stunning Lake Wakatipu views. Great for Insta content!</p>
-          <p>🛋️ Plenty of space to chill between ski sessions and big nights out.</p>
-        </div>
-        <div class="price">
-          <div class="price-label">💰 Estimated per person (quad share, 7 nights)</div>
-          <div class="price-value">$700–$900 NZD</div>
-        </div>
-        <div class="vote">
-          <button onclick="vote('lq')">Vote ⭐</button>
-          <span id="lq-count2" class="counter">0</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="card-emoji">🛋️</span>
-          <div>
-            <h3>The Beacon Apartments</h3>
-            <div class="tags">
-              <span class="tag">📐 Spacious</span>
-              <span class="tag">🎿 Gear Storage</span>
-            </div>
-          </div>
-        </div>
-        <div class="highlight">✅ 10 min walk to centre</div>
-        <div class="card-details">
-          <p>🏠 Comfort upgrade without losing convenience. Big apartments = room for all the ski gear!</p>
-          <p>😴 Great for those who need recovery space between sessions.</p>
-        </div>
-        <div class="price">
-          <div class="price-label">💰 Estimated per person (quad share, 7 nights)</div>
-          <div class="price-value">$600–$800 NZD</div>
-        </div>
-        <div class="vote">
-          <button onclick="vote('beacon')">Vote ⭐</button>
-          <span id="beacon-count2" class="counter">0</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-header">
-      <span class="section-emoji">✨</span>
-      <h2>Premium / Scenic Options</h2>
-    </div>
-    
-    <div class="grid">
-      <div class="card">
-        <div class="card-header">
-          <span class="card-emoji">🌲</span>
-          <div>
-            <h3>Four Seasons Resort Queenstown</h3>
-            <div class="tags">
-              <span class="tag premium">👑 Luxury</span>
-              <span class="tag premium">⛷️ Ski-in Vibes</span>
-            </div>
-          </div>
-        </div>
-        <div class="highlight">✅ Near ski access & gear pickup</div>
-        <div class="card-details">
-          <p>💎 The bougie option! Right next to ski facilities, walking distance to town. Zero buses required.</p>
-          <p>🥂 For those who want to treat themselves and live that luxury ski life.</p>
-        </div>
-        <div class="price">
-          <div class="price-label">💰 Estimated per person (quad share, 7 nights)</div>
-          <div class="price-value">$950–$1,150 NZD</div>
-        </div>
-        <div class="vote">
-          <button onclick="vote('fourseasons')">Vote ⭐</button>
-          <span id="fourseasons-count2" class="counter">0</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span class="card-emoji">🌊</span>
-          <div>
-            <h3>Hilton Queenstown Resort</h3>
-            <div class="tags">
-              <span class="tag premium">🏖️ Lakefront</span>
-              <span class="tag premium">🏨 Full Resort</span>
-            </div>
-          </div>
-        </div>
-        <div class="highlight">⚠️ Bus needed to town centre</div>
-        <div class="card-details">
-          <p>🌅 Stunning lakefront location in Kawarau Village. Resort amenities galore!</p>
-          <p>🚌 Trade-off: You'll need transport to get to the main action, but the views are worth it for some.</p>
-        </div>
-        <div class="price">
-          <div class="price-label">💰 Estimated per person (quad share, 7 nights)</div>
-          <div class="price-value">$900–$1,100 NZD</div>
-        </div>
-        <div class="vote">
-          <button onclick="vote('hilton')">Vote ⭐</button>
-          <span id="hilton-count2" class="counter">0</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-header">
-      <span class="section-emoji">⚠️</span>
-      <h2>What We're Avoiding</h2>
-    </div>
-    
-    <div class="grid">
-      <div class="card avoid-card">
-        <div class="card-header">
-          <span class="card-emoji">❌</span>
-          <div>
-            <h3>Fernhill Area Motels</h3>
-            <div class="tags">
-              <span class="tag warning">😩 Too Far</span>
-              <span class="tag warning">🏔️ Steep Hill</span>
-            </div>
-          </div>
-        </div>
-        <div class="card-details">
-          <p>🚫 Way too far from town. That steep hill will destroy you after a big night!</p>
-          <p>🚌 You'll need a car or bus literally every time you want to do anything. Hard pass.</p>
-        </div>
-      </div>
-
-      <div class="card avoid-card">
-        <div class="card-header">
-          <span class="card-emoji">❌</span>
-          <div>
-            <h3>Frankton Accommodations</h3>
-            <div class="tags">
-              <span class="tag warning">🛫 Near Airport</span>
-              <span class="tag warning">🏜️ Middle of Nowhere</span>
-            </div>
-          </div>
-        </div>
-        <div class="card-details">
-          <p>🚫 Sure it's near the airport, but you're not here to hang at the airport!</p>
-          <p>😴 Zero nightlife, zero walkability. You'll feel isolated from all the action.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="card-view" id="card-view"></div>
 
   <!-- CTA Section -->
   <div class="cta">
@@ -788,41 +506,225 @@
 </div>
 
 <footer>
-  🏔️ Built with love for the Snow Machine 2026 crew • Let's gooo! 🎿🍻
+  🏔️ Built with love for the Snow Machine 2026 crew • Votes saved in <code>localStorage</code> 💾<br>
+  No accounts, no backend, no tracking. Alpine rave democracy only! 🎿🍻
 </footer>
 
 <script>
-  const votes = {};
-  
-  function vote(id) {
-    votes[id] = (votes[id] || 0) + 1;
-    
-    // Update all elements with this ID (table + card view)
-    document.querySelectorAll(`[id^="${id}-count"]`).forEach(el => {
-      el.textContent = votes[id];
-      el.classList.remove('pop');
-      void el.offsetWidth; // Trigger reflow
-      el.classList.add('pop');
+const sections = [
+  {
+    title: '🎉 Social / Budget',
+    emoji: '🎒',
+    description: 'Party vibes, meet new people, save $$$',
+    items: [
+      { id:'nomads', name:'Nomads Hostel', price:'$', priceLabel:'Budget', walk:'Central', tags:['🎉 Social', '💰 Budget'] },
+      { id:'absoloot', name:'Absoloot Hostel', price:'$', priceLabel:'Budget', walk:'Central', tags:['🎉 Social', '🏔️ Views'] },
+      { id:'adventure', name:'Adventure Hostel', price:'$', priceLabel:'Budget', walk:'Central', tags:['🎉 Social', '⛷️ Ski Crowd'] },
+      { id:'q2', name:'Q2 Hostel', price:'$', priceLabel:'Budget', walk:'Central', tags:['🛏️ Pods', '🆕 Modern'] },
+      { id:'lylo', name:'LyLo Queenstown', price:'$$', priceLabel:'Mid', walk:'Central', tags:['✨ Boutique', '📸 Instagrammable'] }
+    ]
+  },
+  {
+    title: '🏢 Apartments / Group Friendly',
+    emoji: '🏠',
+    description: 'Kitchen, space, perfect for squads',
+    items: [
+      { id:'gateway', name:'Gateway Apartments', price:'$$', priceLabel:'Mid', walk:'10–15 min', tags:['👯 Groups', '🍳 Kitchen'] },
+      { id:'bluepeaks', name:'Blue Peaks Lodge', price:'$$', priceLabel:'Mid', walk:'10 min', tags:['🏔️ Mountain Views', '🅿️ Parking'] },
+      { id:'melbourne', name:'Melbourne Apartments', price:'$$$', priceLabel:'Premium', walk:'Central', tags:['⚡ Ultra Central', '✨ Modern'] },
+      { id:'highview', name:'Highview Apartments', price:'$$$', priceLabel:'Premium', walk:'10 min', tags:['🌅 Lake Views', '📐 Spacious'] },
+      { id:'lakeridge', name:'Lakeridge Apartments', price:'$$$', priceLabel:'Premium', walk:'15 min', tags:['🏊 Pool', '🧖 Spa'] }
+    ]
+  },
+  {
+    title: '🌅 Hotels / Comfort',
+    emoji: '🛎️',
+    description: 'Breakfast included, daily housekeeping, zero effort',
+    items: [
+      { id:'peppers', name:'Peppers Beacon', price:'$$$', priceLabel:'Premium', walk:'Central', tags:['🍳 Breakfast', '🏋️ Gym'] },
+      { id:'crowne', name:'Crowne Plaza', price:'$$$', priceLabel:'Premium', walk:'Central', tags:['⚡ Central', '🛎️ Full Service'] },
+      { id:'novotel', name:'Novotel Queenstown', price:'$$$', priceLabel:'Premium', walk:'Central', tags:['🌊 Lakefront', '🍽️ Restaurant'] },
+      { id:'swiss', name:'Swiss-Belsuites Pounamu', price:'$$$', priceLabel:'Premium', walk:'Central', tags:['🧖 Spa', '🛋️ Suites'] },
+      { id:'hilton', name:'Hilton Queenstown', price:'$$$$', priceLabel:'Luxury', walk:'🚌 Bus required', tags:['💎 Luxury', '🌅 Stunning Views'] }
+    ]
+  },
+  {
+    title: '🏠 Villas / Large Groups',
+    emoji: '🏰',
+    description: 'Big squads, house party energy, split the cost',
+    items: [
+      { id:'commonage', name:'Commonage Villas', price:'$$$$', priceLabel:'Luxury', walk:'10 min', tags:['👯 8-10 ppl', '🔥 Fireplace'] },
+      { id:'villapukaki', name:'Villa Pukaki', price:'$$$$', priceLabel:'Luxury', walk:'10–15 min', tags:['🏔️ Mountain Views', '🛁 Hot Tub'] },
+      { id:'lakehouse', name:'Lakehouse Villas', price:'$$$$', priceLabel:'Luxury', walk:'15 min', tags:['🌊 Lakefront', '🎱 Games Room'] }
+    ]
+  }
+];
+
+function getVote(id) {
+  return Number(localStorage.getItem('vote_' + id) || 0);
+}
+
+function getMaxVotes() {
+  const allItems = sections.flatMap(s => s.items);
+  return Math.max(0, ...allItems.map(i => getVote(i.id)));
+}
+
+function getPriceClass(label) {
+  const classes = { 'Budget': 'budget', 'Mid': 'mid', 'Premium': 'premium', 'Luxury': 'luxury' };
+  return classes[label] || 'mid';
+}
+
+function renderTableView() {
+  const container = document.getElementById('table-view');
+  const maxVotes = getMaxVotes();
+  let html = '';
+
+  sections.forEach(section => {
+    html += `
+      <div class="section-header">
+        <span class="section-emoji">${section.emoji}</span>
+        <h2>${section.title}</h2>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>🏨 Accommodation</th>
+            <th>💰 Price</th>
+            <th>🚶 Walk</th>
+            <th>🏷️ Tags</th>
+            <th>⭐ Votes</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+
+    section.items.forEach(item => {
+      const count = getVote(item.id);
+      const isTop = count > 0 && count === maxVotes;
+      html += `
+        <tr class="${isTop ? 'top-pick' : ''}">
+          <td>
+            <strong>${item.name}</strong>
+            ${isTop ? '<span class="top-badge">🏆 TOP PICK</span>' : ''}
+          </td>
+          <td class="price-cell">${item.price}</td>
+          <td class="walk-time">${item.walk}</td>
+          <td>${item.tags.map(t => `<span class="table-tag">${t}</span>`).join('')}</td>
+          <td>
+            <div class="vote-cell">
+              <button onclick="vote('${item.id}')">Vote ⭐</button>
+              <span class="counter" id="${item.id}-count-table">${count}</span>
+            </div>
+          </td>
+        </tr>
+      `;
     });
-  }
+
+    html += '</tbody></table>';
+  });
+
+  container.innerHTML = html;
+}
+
+function renderCardView() {
+  const container = document.getElementById('card-view');
+  const maxVotes = getMaxVotes();
+  let html = '';
+
+  sections.forEach(section => {
+    html += `
+      <div class="section-header">
+        <span class="section-emoji">${section.emoji}</span>
+        <h2>${section.title}</h2>
+      </div>
+      <p style="color:#6b6560; margin-bottom:1rem;">${section.description}</p>
+      <div class="grid">
+    `;
+
+    section.items.forEach(item => {
+      const count = getVote(item.id);
+      const isTop = count > 0 && count === maxVotes;
+      html += `
+        <div class="card ${isTop ? 'top-pick' : ''}">
+          ${isTop ? '<div class="card-badge">🏆 TOP PICK</div>' : ''}
+          <div class="card-header">
+            <span class="card-emoji">${section.emoji}</span>
+            <div>
+              <h3>${item.name}</h3>
+              <div class="card-meta">
+                <span class="price-tag">${item.price} ${item.priceLabel}</span> • 
+                <span class="walk-tag">📍 ${item.walk}</span>
+              </div>
+            </div>
+          </div>
+          <div class="tags">
+            ${item.tags.map(t => `<span class="tag ${getPriceClass(item.priceLabel)}">${t}</span>`).join('')}
+          </div>
+          <div class="vote">
+            <button onclick="vote('${item.id}')">Vote ⭐</button>
+            <span class="counter" id="${item.id}-count-card">${count}</span>
+          </div>
+        </div>
+      `;
+    });
+
+    html += '</div>';
+  });
+
+  container.innerHTML = html;
+}
+
+function render() {
+  renderTableView();
+  renderCardView();
+}
+
+function vote(id) {
+  const key = 'vote_' + id;
+  const count = getVote(id) + 1;
+  localStorage.setItem(key, count);
   
-  function switchView(view) {
-    const tableView = document.getElementById('table-view');
-    const cardView = document.getElementById('card-view');
-    const buttons = document.querySelectorAll('.view-toggle button');
-    
-    buttons.forEach(btn => btn.classList.remove('active'));
-    
-    if (view === 'table') {
-      tableView.classList.add('active');
-      cardView.classList.remove('active');
-      buttons[0].classList.add('active');
-    } else {
-      tableView.classList.remove('active');
-      cardView.classList.add('active');
-      buttons[1].classList.add('active');
-    }
+  // Update counters with animation
+  document.querySelectorAll(`[id^="${id}-count"]`).forEach(el => {
+    el.textContent = count;
+    el.classList.remove('pop');
+    void el.offsetWidth;
+    el.classList.add('pop');
+  });
+  
+  // Re-render to update TOP PICK badges
+  render();
+}
+
+function resetVotes() {
+  if (confirm('🗑️ Reset all votes? This cannot be undone!')) {
+    Object.keys(localStorage)
+      .filter(k => k.startsWith('vote_'))
+      .forEach(k => localStorage.removeItem(k));
+    render();
   }
+}
+
+function switchView(view) {
+  const tableView = document.getElementById('table-view');
+  const cardView = document.getElementById('card-view');
+  const buttons = document.querySelectorAll('.view-toggle button');
+  
+  buttons.forEach(btn => btn.classList.remove('active'));
+  
+  if (view === 'table') {
+    tableView.classList.add('active');
+    cardView.classList.remove('active');
+    buttons[0].classList.add('active');
+  } else {
+    tableView.classList.remove('active');
+    cardView.classList.add('active');
+    buttons[1].classList.add('active');
+  }
+}
+
+// Initial render
+render();
 </script>
 </body>
 </html>
