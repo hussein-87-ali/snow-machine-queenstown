@@ -50,7 +50,7 @@
     }
     
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 2rem 1.5rem;
     }
@@ -67,6 +67,30 @@
     .intro h2 {
       color: #5c8a6e;
       margin-bottom: 0.5rem;
+    }
+    
+    .package-info {
+      background: linear-gradient(135deg, #e8f0eb, #f5f0e8);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+    
+    .package-info h3 {
+      color: #4a7560;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .package-info ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+    }
+    
+    .package-info li {
+      font-size: 0.9rem;
     }
     
     .controls {
@@ -144,6 +168,7 @@
       font-size: 2rem;
     }
     
+    /* TABLE VIEW */
     .table-view {
       display: none;
       overflow-x: auto;
@@ -166,15 +191,18 @@
     th {
       background: #5c8a6e;
       color: #fff;
-      padding: 1rem;
+      padding: 0.85rem 0.75rem;
       text-align: left;
       font-weight: 700;
+      font-size: 0.85rem;
+      white-space: nowrap;
     }
     
     td {
-      padding: 1rem;
+      padding: 0.85rem 0.75rem;
       border-bottom: 1px solid #e8e2d9;
       vertical-align: middle;
+      font-size: 0.9rem;
     }
     
     tr:last-child td {
@@ -193,26 +221,15 @@
       border-left: 4px solid #5c8a6e;
     }
     
-    .table-tag {
-      display: inline-block;
-      background: #e8f0eb;
-      color: #4a7560;
-      padding: 0.25rem 0.6rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      margin: 0.15rem;
-    }
-    
     .top-badge {
       display: inline-block;
       background: linear-gradient(135deg, #5c8a6e, #7ba38a);
       color: #fff;
-      padding: 0.25rem 0.6rem;
+      padding: 0.2rem 0.5rem;
       border-radius: 20px;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 800;
-      margin-left: 0.5rem;
+      margin-left: 0.4rem;
       animation: pulse 2s infinite;
     }
     
@@ -223,12 +240,22 @@
     
     .price-cell {
       font-weight: 700;
-      color: #8b7355;
+      color: #5c8a6e;
+      white-space: nowrap;
     }
     
-    .walk-time {
-      color: #5c8a6e;
-      font-weight: 600;
+    .stars {
+      color: #d4a853;
+      letter-spacing: -2px;
+    }
+    
+    .location-cell {
+      font-size: 0.8rem;
+      color: #6b6560;
+    }
+    
+    .sleeps-cell {
+      text-align: center;
     }
     
     .vote-cell {
@@ -237,6 +264,7 @@
       gap: 0.5rem;
     }
     
+    /* CARD VIEW */
     .card-view {
       display: none;
     }
@@ -247,7 +275,7 @@
     
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 1.5rem;
       margin-bottom: 2rem;
     }
@@ -287,46 +315,80 @@
     }
     
     .card-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
     }
     
-    .card-emoji {
-      font-size: 2rem;
+    .card-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
     }
     
     .card h3 {
       color: #3d3a36;
-      font-size: 1.1rem;
-      margin-bottom: 0.25rem;
+      font-size: 1.15rem;
+      margin: 0;
     }
     
-    .card-meta {
-      font-size: 0.85rem;
-      color: #6b6560;
-      margin-bottom: 0.5rem;
+    .card-stars {
+      color: #d4a853;
+      font-size: 1rem;
+      letter-spacing: -1px;
+      white-space: nowrap;
     }
     
-    .card-meta .price-tag {
-      color: #8b7355;
-      font-weight: 700;
-    }
-    
-    .card-meta .walk-tag {
-      color: #5c8a6e;
-      font-weight: 600;
-    }
-    
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
+    .card-price-big {
+      background: linear-gradient(135deg, #5c8a6e, #4a7560);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      display: inline-block;
       margin-bottom: 0.75rem;
     }
     
-    .tag {
+    .card-price-big .amount {
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+    
+    .card-price-big .per {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+    
+    .card-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+    }
+    
+    .card-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    
+    .card-detail .label {
+      color: #8a847d;
+    }
+    
+    .card-detail .value {
+      color: #3d3a36;
+      font-weight: 600;
+    }
+    
+    .card-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    
+    .feature-tag {
       display: inline-block;
       background: #e8f0eb;
       color: #4a7560;
@@ -336,28 +398,53 @@
       font-weight: 700;
     }
     
-    .tag.budget { background: #e8f0eb; color: #4a7560; }
-    .tag.mid { background: #f5ebe0; color: #8b7355; }
-    .tag.premium { background: #f0e8f5; color: #7b5c8a; }
-    .tag.luxury { background: #f5e8e8; color: #8a5c5c; }
+    .feature-tag.highlight {
+      background: #f5ebe0;
+      color: #8b7355;
+    }
+    
+    .card-description {
+      font-size: 0.85rem;
+      color: #6b6560;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid #e8e2d9;
+    }
+    
+    .card-link {
+      color: #5c8a6e;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    
+    .card-link:hover {
+      text-decoration: underline;
+    }
     
     .vote {
-      margin-top: 1rem;
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
     }
     
     .vote button, table button {
       background: linear-gradient(135deg, #5c8a6e, #7ba38a);
       border: none;
       color: #fff;
-      padding: 0.5rem 1rem;
+      padding: 0.45rem 0.9rem;
       border-radius: 25px;
       cursor: pointer;
       font-family: inherit;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       transition: all 0.3s ease;
     }
     
@@ -367,10 +454,10 @@
     }
     
     .counter {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 800;
       color: #5c8a6e;
-      min-width: 24px;
+      min-width: 20px;
     }
     
     .cta {
@@ -403,6 +490,23 @@
       font-size: 1.1rem;
       font-weight: 700;
       color: #ffd9a0;
+    }
+    
+    .cta-btn {
+      display: inline-block;
+      background: #fff;
+      color: #4a7560;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      font-weight: 800;
+      text-decoration: none;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .cta-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
     
     footer {
@@ -444,14 +548,18 @@
       }
       
       table {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
       }
       
       th, td {
-        padding: 0.6rem 0.4rem;
+        padding: 0.5rem 0.4rem;
       }
       
       .grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .card-details-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -461,11 +569,11 @@
 
 <header>
   <h1>❄️ Snow Machine Queenstown 2026 ⛷️</h1>
-  <p>🏠 Where to Stay • 🚶 Walkable • 👯 Group-friendly • 🗳️ Vote for your fave!</p>
+  <p>🏠 Official Accommodation Guide • 🗳️ Vote for your fave!</p>
 </header>
 
 <div class="dates-banner">
-  📅 8–15 September 2026 • 📍 Queenstown, New Zealand
+  📅 8–15 September 2026 • 📍 Queenstown, New Zealand • 💰 Prices in AUD
 </div>
 
 <div class="container">
@@ -473,24 +581,31 @@
   <div class="intro">
     <h2>👋 Hey legends!</h2>
     <p>
-      Pick your vibe for <strong>Snow Machine Queenstown 2026</strong>! 🎿
-      Vote for your favourite spots – votes are saved locally so you can screenshot and share! 📸
-      The goal: stay central 🎯, walk everywhere 🚶, après-ski access 🍻, and recover space 😴.
+      All prices are <strong>official Snow Machine packages</strong> from <a href="https://nz.snow-machine.com/packages/" target="_blank" style="color:#5c8a6e;">nz.snow-machine.com</a>. Vote for your favourites – votes save locally so you can screenshot and share! 📸
     </p>
+    <div class="package-info">
+      <h3>📦 All Packages Include:</h3>
+      <ul>
+        <li>🛏️ 7 nights accommodation</li>
+        <li>🎿 4-day lift pass (Remarkables + Coronet Peak)</li>
+        <li>⛷️ Entry to all après stages on-piste</li>
+        <li>🎉 3 nights at Main Arena</li>
+      </ul>
+    </div>
   </div>
 
   <div class="controls">
     <div class="view-toggle">
-      <button class="active" onclick="switchView('table')">📊 Table View</button>
-      <button onclick="switchView('cards')">🃏 Card View</button>
+      <button class="active" onclick="switchView('table')">📊 Quick Compare</button>
+      <button onclick="switchView('cards')">🃏 Full Details</button>
     </div>
-    <button class="reset-btn" onclick="resetVotes()">🔄 Reset All Votes</button>
+    <button class="reset-btn" onclick="resetVotes()">🔄 Reset Votes</button>
   </div>
 
-  <!-- ============ TABLE VIEW ============ -->
+  <!-- TABLE VIEW -->
   <div class="table-view active" id="table-view"></div>
 
-  <!-- ============ CARD VIEW ============ -->
+  <!-- CARD VIEW -->
   <div class="card-view" id="card-view"></div>
 
   <!-- CTA Section -->
@@ -500,62 +615,85 @@
       <p>🎫 <strong>Presale:</strong> Tue 3 Feb – 5PM AEDT</p>
       <p>🌐 <strong>General Sale:</strong> Wed 4 Feb – 9AM AEDT</p>
     </div>
-    <p class="cta-warning">🔥 Apartments sell out FIRST! Melbourne crew will absolutely descend. Be ready to book fast! 🏃‍♂️💨</p>
+    <p class="cta-warning">🔥 Popular spots sell out FAST! Be ready to book!</p>
+    <a href="https://arep.co/p/snow-machine-queenstown-2026" target="_blank" class="cta-btn">🎟️ Sign Up for Pre-Sale</a>
   </div>
 
 </div>
 
 <footer>
-  🏔️ Built with love for the Snow Machine 2026 crew • Votes saved in <code>localStorage</code> 💾<br>
-  No accounts, no backend, no tracking. Alpine rave democracy only! 🎿🍻
+  🏔️ Built for the Snow Machine 2026 crew • Votes saved in <code>localStorage</code> 💾<br>
+  Prices from <a href="https://nz.snow-machine.com/packages/" target="_blank" style="color:#5c8a6e;">Snow Machine Official</a> • No tracking, just vibes 🎿
 </footer>
 
 <script>
 const sections = [
   {
-    title: '🎉 Social / Budget',
-    emoji: '🎒',
-    description: 'Party vibes, meet new people, save $$$',
+    title: '🎒 Hostels & Social',
+    emoji: '🎉',
+    description: 'Meet new people, party vibes, budget-friendly',
     items: [
-      { id:'nomads', name:'Nomads Hostel', price:'$', priceLabel:'Budget', walk:'Central', tags:['🎉 Social', '💰 Budget'] },
-      { id:'absoloot', name:'Absoloot Hostel', price:'$', priceLabel:'Budget', walk:'Central', tags:['🎉 Social', '🏔️ Views'] },
-      { id:'adventure', name:'Adventure Hostel', price:'$', priceLabel:'Budget', walk:'Central', tags:['🎉 Social', '⛷️ Ski Crowd'] },
-      { id:'q2', name:'Q2 Hostel', price:'$', priceLabel:'Budget', walk:'Central', tags:['🛏️ Pods', '🆕 Modern'] },
-      { id:'lylo', name:'LyLo Queenstown', price:'$$', priceLabel:'Mid', walk:'Central', tags:['✨ Boutique', '📸 Instagrammable'] }
+      { id:'nomads', name:'Nomads Hostel', price:1034, stars:3, type:'Hostel', sleeps:'4-6', location:'Central Queenstown', walk:'2 min to town', features:['🎉 Social atmosphere','🍳 Shared kitchen','👥 Dorm style','🎮 Common areas'], desc:'The OG backpacker spot. Social vibes, central location, meet legends from everywhere.', link:'https://nz.snow-machine.com/accommodation/nomads-hostel-bronze-package/' },
+      { id:'pinewood', name:'Pinewood Lodge', price:1128, stars:3, type:'Lodge', sleeps:'2-4', location:'Fernhill', walk:'10 min to town', features:['🏔️ Mountain views','🅿️ Free parking','🌲 Quiet setting','☕ Continental brekkie'], desc:'Peaceful lodge vibes with mountain views. Good for those who want sleep between parties.', link:'https://nz.snow-machine.com/accommodation/pinewood-lodge/' },
+      { id:'absoloot', name:'Absoloot Hostel', price:1180, stars:3, type:'Hostel', sleeps:'4-8', location:'Central Queenstown', walk:'2 min to town', features:['⚡ Ultra central','🎉 Party hostel','🍺 Bar onsite','👯 Social events'], desc:'Right in the action! Known for its party atmosphere and social events.', link:'https://nz.snow-machine.com/accommodation/absoloot-hostel-bronze-package/' },
+      { id:'adventure', name:'Adventure Hostel', price:1196, stars:3, type:'Hostel', sleeps:'4-6', location:'Central Queenstown', walk:'3 min to town', features:['⛷️ Ski crowd','🎿 Gear storage','🔥 Fireplace','🍳 Kitchen'], desc:'Popular with the ski/snowboard crowd. Gear storage and cozy fireplace.', link:'https://nz.snow-machine.com/accommodation/adventure-hostel/' },
+      { id:'q2', name:'Q2 Hostel', price:1196, stars:3.5, type:'Hostel', sleeps:'2-4', location:'Central Queenstown', walk:'2 min to town', features:['🆕 Modern pods','🔒 Privacy screens','📱 USB charging','🛋️ Lounge'], desc:'Modern pod-style hostel. More privacy than traditional dorms.', link:'https://nz.snow-machine.com/accommodation/q2-hostel-2/' },
+      { id:'hakalake', name:'Haka House Lakefront', price:1212, stars:3.5, type:'Hostel', sleeps:'4-6', location:'Lakefront', walk:'5 min to town', features:['🌊 Lake views','☕ Free brekkie','🧖 Sauna','🎯 Central'], desc:'Lakefront location with breakfast included. Sauna for post-ski recovery!', link:'https://nz.snow-machine.com/accommodation/haka-house-lakefront/' },
+      { id:'haka', name:'Haka House', price:1212, stars:3.5, type:'Hostel', sleeps:'4-6', location:'Central', walk:'4 min to town', features:['☕ Free brekkie','👯 Social','🎮 Games room','🍳 Kitchen'], desc:'Reliable Haka quality. Breakfast included, social spaces, good vibes.', link:'https://nz.snow-machine.com/accommodation/haka-house/' },
+      { id:'lylo', name:'LyLo Queenstown', price:1280, stars:4, type:'Boutique Hostel', sleeps:'2-4', location:'Central Queenstown', walk:'2 min to town', features:['✨ Design-focused','📸 Instagrammable','🍸 Bar','🛏️ Premium pods'], desc:'Boutique hostel with serious style. Instagram-worthy interiors, rooftop bar.', link:'https://nz.snow-machine.com/accommodation/lylo/' }
     ]
   },
   {
-    title: '🏢 Apartments / Group Friendly',
+    title: '🏢 Apartments & Units',
     emoji: '🏠',
-    description: 'Kitchen, space, perfect for squads',
+    description: 'Kitchen facilities, more space, great for groups',
     items: [
-      { id:'gateway', name:'Gateway Apartments', price:'$$', priceLabel:'Mid', walk:'10–15 min', tags:['👯 Groups', '🍳 Kitchen'] },
-      { id:'bluepeaks', name:'Blue Peaks Lodge', price:'$$', priceLabel:'Mid', walk:'10 min', tags:['🏔️ Mountain Views', '🅿️ Parking'] },
-      { id:'melbourne', name:'Melbourne Apartments', price:'$$$', priceLabel:'Premium', walk:'Central', tags:['⚡ Ultra Central', '✨ Modern'] },
-      { id:'highview', name:'Highview Apartments', price:'$$$', priceLabel:'Premium', walk:'10 min', tags:['🌅 Lake Views', '📐 Spacious'] },
-      { id:'lakeridge', name:'Lakeridge Apartments', price:'$$$', priceLabel:'Premium', walk:'15 min', tags:['🏊 Pool', '🧖 Spa'] }
+      { id:'gateway', name:'Gateway Apartments', price:1236, stars:3.5, type:'Apartment', sleeps:'4-6', location:'Frankton Road', walk:'10-15 min', features:['🍳 Full kitchen','🛋️ Living area','🅿️ Parking','🏔️ Views'], desc:'Solid apartments with full kitchen. Good value for groups who want to self-cater.', link:'https://nz.snow-machine.com/accommodation/gateway-apartments/' },
+      { id:'villatuke', name:'Villa Tuke', price:1328, stars:4, type:'Villa', sleeps:'6', location:'Queenstown Hill', walk:'12 min', features:['🏡 3 bedroom','🍳 Full kitchen','🌄 Views','🅿️ Parking'], desc:'Proper villa vibes. 3 bedrooms, full kitchen, great for a tight crew.', link:'https://nz.snow-machine.com/accommodation/villa-tuke-3-bedroom/' },
+      { id:'pounamu', name:'Pounamu Units', price:1360, stars:4, type:'Apartment', sleeps:'2-4', location:'Central', walk:'3 min to town', features:['⚡ Central','🍳 Kitchenette','🛁 Ensuite','📺 Smart TV'], desc:'Central location, modern units. Walk to everything!', link:'https://nz.snow-machine.com/accommodation/pounamu-queenstown/' },
+      { id:'bluepeaks', name:'Blue Peaks Lodge', price:1393, stars:3.5, type:'Lodge', sleeps:'2-4', location:'Central', walk:'5 min to town', features:['🏔️ Mountain views','🅿️ Parking','🍳 Kitchen','😴 Quiet'], desc:'Lodge-style with mountain views. Good for those wanting peace and quiet.', link:'https://nz.snow-machine.com/accommodation/blue-peaks-lodge/' },
+      { id:'villadellago', name:'Villa Del Lago', price:1395, stars:4, type:'Villa', sleeps:'6', location:'Lakeside', walk:'8 min', features:['🌊 Lake views','🏡 3 bed','🔥 Fireplace','🍳 Kitchen'], desc:'Lakeside villa with fireplace. Cozy AF for après-ski hangs.', link:'https://nz.snow-machine.com/accommodation/villa-del-lago/' },
+      { id:'villapukaki', name:'Villa Pukaki', price:1400, stars:4, type:'Villa', sleeps:'6', location:'Queenstown Hill', walk:'10 min', features:['🏡 3 bedroom','🛁 Hot tub','🌄 Views','🍳 Kitchen'], desc:'Villa with HOT TUB! Perfect for post-ski soaks with the crew.', link:'https://nz.snow-machine.com/accommodation/villa-pukaki-3-bedroom/' },
+      { id:'marina', name:'Marina Units', price:1413, stars:4, type:'Apartment', sleeps:'4', location:'Marina', walk:'7 min', features:['⛵ Marina views','🍳 Kitchen','🛋️ Spacious','🅿️ Parking'], desc:'Marina location with water views. Modern and spacious.', link:'https://nz.snow-machine.com/accommodation/marina-complex/' },
+      { id:'koura', name:'Koura Apartments', price:1417, stars:4, type:'Apartment', sleeps:'4-6', location:'Central', walk:'4 min to town', features:['⚡ Central','✨ Modern','🍳 Kitchen','🛁 Quality'], desc:'Quality central apartments. Modern fit-out, walk to everything.', link:'https://nz.snow-machine.com/accommodation/koura-apartments/' },
+      { id:'nugget', name:'The Nugget', price:1432, stars:4, type:'Apartment', sleeps:'4', location:'Central', walk:'3 min to town', features:['⚡ Prime location','✨ Stylish','🍳 Kitchen','🌆 Town views'], desc:'Prime central location, stylish interiors. Live your best life.', link:'https://nz.snow-machine.com/accommodation/the-nugget/' },
+      { id:'highview', name:'Highview Apartments', price:1571, stars:4, type:'Apartment', sleeps:'4-6', location:'Queenstown Hill', walk:'10 min', features:['🌄 Panoramic views','📐 Spacious','🍳 Full kitchen','🅿️ Parking'], desc:'Panoramic views of the lake and mountains. Worth the short walk!', link:'https://nz.snow-machine.com/accommodation/highview-apartments/' },
+      { id:'melbourne', name:'Melbourne Apartments', price:1576, stars:4, type:'Apartment', sleeps:'6', location:'Central', walk:'2 min to town', features:['⚡ Ultra central','🏡 3 bed','✨ Modern','🍳 Kitchen'], desc:'3-bed apartment RIGHT in town. Perfect for a crew who wants convenience.', link:'https://nz.snow-machine.com/accommodation/15-melbourne-unit-3-3-bedroom/' },
+      { id:'waterfront', name:'Waterfront Apartments', price:1604, stars:4.5, type:'Apartment', sleeps:'4-6', location:'Lakefront', walk:'5 min', features:['🌊 Lakefront','✨ Premium','🍳 Kitchen','🛁 Luxury bath'], desc:'Premium lakefront living. Wake up to lake views every day!', link:'https://nz.snow-machine.com/accommodation/the-waterfront/' },
+      { id:'lakeridge', name:'Lakeridge Apartments', price:1668, stars:4, type:'Apartment', sleeps:'6', location:'Fernhill', walk:'12 min', features:['🌊 Lake views','🏡 3 bed','🏊 Pool','🧖 Spa'], desc:'Lake views, pool AND spa! Recovery game strong.', link:'https://nz.snow-machine.com/accommodation/lakeridge-3-bedroom-std-lakeview-apartment/' }
     ]
   },
   {
-    title: '🌅 Hotels / Comfort',
+    title: '🏨 Hotels',
     emoji: '🛎️',
-    description: 'Breakfast included, daily housekeeping, zero effort',
+    description: 'Breakfast, daily housekeeping, zero effort required',
     items: [
-      { id:'peppers', name:'Peppers Beacon', price:'$$$', priceLabel:'Premium', walk:'Central', tags:['🍳 Breakfast', '🏋️ Gym'] },
-      { id:'crowne', name:'Crowne Plaza', price:'$$$', priceLabel:'Premium', walk:'Central', tags:['⚡ Central', '🛎️ Full Service'] },
-      { id:'novotel', name:'Novotel Queenstown', price:'$$$', priceLabel:'Premium', walk:'Central', tags:['🌊 Lakefront', '🍽️ Restaurant'] },
-      { id:'swiss', name:'Swiss-Belsuites Pounamu', price:'$$$', priceLabel:'Premium', walk:'Central', tags:['🧖 Spa', '🛋️ Suites'] },
-      { id:'hilton', name:'Hilton Queenstown', price:'$$$$', priceLabel:'Luxury', walk:'🚌 Bus required', tags:['💎 Luxury', '🌅 Stunning Views'] }
+      { id:'copthorne', name:'Copthorne Hotel Lakefront', price:1386, stars:4, type:'Hotel', sleeps:'2', location:'Lakefront', walk:'5 min', features:['🌊 Lakefront','🍳 Breakfast opt','🛎️ Room service','🏊 Pool'], desc:'Solid 4-star lakefront hotel. Pool and room service for the win.', link:'https://nz.snow-machine.com/accommodation/copthorne-hotel-and-resort-queenstown-lakefront/' },
+      { id:'mipad', name:'Mi Pad', price:1484, stars:4, type:'Hotel', sleeps:'2', location:'Central', walk:'2 min to town', features:['📱 Tech-forward','✨ Modern','☕ Café','🎯 Central'], desc:'Modern tech-forward hotel. Sleek design, perfect location.', link:'https://nz.snow-machine.com/accommodation/mi-pad/' },
+      { id:'doubletree', name:'DoubleTree by Hilton', price:1492, stars:4, type:'Hotel', sleeps:'2', location:'Central', walk:'5 min', features:['🍪 Famous cookies','🍳 Brekkie incl','🏋️ Gym','🛎️ Hilton quality'], desc:'Hilton quality with famous warm cookies on arrival! Breakfast included.', link:'https://nz.snow-machine.com/accommodation/doubletree-by-hilton-breakfast-included/' },
+      { id:'laquinta', name:'La Quinta by Wyndham', price:1492, stars:4, type:'Hotel', sleeps:'2-4', location:'Central', walk:'4 min', features:['✨ Modern','🍳 Brekkie opt','🛋️ Suites avail','🅿️ Parking'], desc:'Modern Wyndham property. Good balance of quality and value.', link:'https://nz.snow-machine.com/accommodation/la-quinta-by-wyndham/' },
+      { id:'heartland', name:'Heartland Hotel', price:1545, stars:3.5, type:'Hotel', sleeps:'2', location:'Central', walk:'3 min', features:['🎯 Central','🍳 Restaurant','🛎️ Room service','💰 Value'], desc:'No-frills hotel in prime location. Does exactly what it says.', link:'https://nz.snow-machine.com/accommodation/hartland-hotel-queenstown-7-night-package/' },
+      { id:'holidayinn', name:'Holiday Inn Frankton', price:1595, stars:4, type:'Hotel', sleeps:'2', location:'Frankton Road', walk:'8 min', features:['🍳 Brekkie incl','🏋️ Gym','🅿️ Parking','🛎️ IHG quality'], desc:'Reliable Holiday Inn quality. Breakfast included!', link:'https://nz.snow-machine.com/accommodation/holiday-inn-frankton-road-breakfast-included/' },
+      { id:'swissbelsuites', name:'Swiss-Belsuites Pounamu', price:1598, stars:4.5, type:'Hotel', sleeps:'2-4', location:'Central', walk:'2 min to town', features:['⚡ Prime location','🧖 Spa','🛋️ Suites','✨ Upscale'], desc:'Upscale suites in prime location. Spa facilities for recovery days.', link:'https://nz.snow-machine.com/accommodation/swiss-belsuites-pounamu/' },
+      { id:'peppers', name:'Peppers Beacon', price:1615, stars:4.5, type:'Hotel', sleeps:'2-4', location:'Central', walk:'3 min', features:['✨ Premium','🍳 Restaurant','🏋️ Gym','🌊 Lake views'], desc:'Premium hotel with restaurant, gym, and lake views. Treat yourself!', link:'https://nz.snow-machine.com/accommodation/peppers-beacon/' },
+      { id:'ramada', name:'Ramada Central', price:1624, stars:4, type:'Hotel', sleeps:'2-4', location:'Central', walk:'1 min to town', features:['⚡ ULTRA central','✨ Modern','🍳 Kitchen','🛋️ Suites'], desc:'Literally in the middle of town. Can\'t get more central than this!', link:'https://nz.snow-machine.com/accommodation/ramada-queenstown-central/' },
+      { id:'sudima', name:'Sudima', price:1648, stars:4.5, type:'Hotel', sleeps:'2', location:'Central', walk:'3 min', features:['🍳 Brekkie incl','♿ Accessible','🌿 Eco-friendly','✨ Modern'], desc:'Eco-friendly luxury with breakfast included. Modern and accessible.', link:'https://nz.snow-machine.com/accommodation/sudima-breakfast-included/' },
+      { id:'scenic', name:'Scenic Suites', price:1664, stars:4.5, type:'Hotel', sleeps:'2-4', location:'Central', walk:'4 min', features:['🌄 Views','🛋️ Suites','🍳 Restaurant','🧖 Spa'], desc:'Scenic views, spacious suites, spa facilities. Living large!', link:'https://nz.snow-machine.com/accommodation/scenic-suites/' },
+      { id:'crowne', name:'Crowne Plaza', price:1743, stars:4.5, type:'Hotel', sleeps:'2', location:'Central', walk:'2 min to town', features:['👑 IHG Premium','🍳 Restaurant','🏋️ Gym','🛎️ Full service'], desc:'Premium IHG property. Full service hotel experience.', link:'https://nz.snow-machine.com/accommodation/crowne-plaza/' },
+      { id:'hilton', name:'Hilton Queenstown', price:1757, stars:5, type:'Hotel', sleeps:'2', location:'Kawarau Village', walk:'🚌 Bus needed', features:['💎 5-star luxury','🍳 Brekkie incl','🌊 Lakefront','🧖 Spa'], desc:'5-star lakefront luxury with breakfast. Bus to town but SO worth it for the experience.', link:'https://nz.snow-machine.com/accommodation/hilton-queenstown-breakfast-included/' },
+      { id:'novotel', name:'Novotel', price:1929, stars:4.5, type:'Hotel', sleeps:'2', location:'Lakefront', walk:'5 min', features:['🌊 Lakefront','🍳 Restaurant','🏊 Pool','✨ Premium'], desc:'Premium lakefront Novotel. Pool, restaurant, all the amenities.', link:'https://nz.snow-machine.com/accommodation/novotel/' },
+      { id:'rees', name:'The Rees', price:1776, stars:5, type:'Hotel', sleeps:'2-4', location:'Lakefront', walk:'🚌 Bus needed', features:['💎 5-star','🌊 Lake views','🍽️ Fine dining','🧖 Spa'], desc:'Ultimate luxury lakefront property. Fine dining, spa, incredible views.', link:'https://nz.snow-machine.com/accommodation/the-rees/' }
     ]
   },
   {
-    title: '🏠 Villas / Large Groups',
-    emoji: '🏰',
-    description: 'Big squads, house party energy, split the cost',
+    title: '🏰 Luxury Villas & Houses',
+    emoji: '💎',
+    description: 'Baller status, hot tubs, incredible views, split with the crew',
     items: [
-      { id:'commonage', name:'Commonage Villas', price:'$$$$', priceLabel:'Luxury', walk:'10 min', tags:['👯 8-10 ppl', '🔥 Fireplace'] },
-      { id:'villapukaki', name:'Villa Pukaki', price:'$$$$', priceLabel:'Luxury', walk:'10–15 min', tags:['🏔️ Mountain Views', '🛁 Hot Tub'] },
-      { id:'lakehouse', name:'Lakehouse Villas', price:'$$$$', priceLabel:'Luxury', walk:'15 min', tags:['🌊 Lakefront', '🎱 Games Room'] }
+      { id:'commonage', name:'Commonage Villas', price:1898, stars:4.5, type:'Villa', sleeps:'6', location:'Commonage', walk:'10 min', features:['🏡 3 bed villa','🔥 Fireplace','🌄 Views','🍳 Full kitchen'], desc:'Stunning villa with fireplace and views. Perfect for a crew of 6.', link:'https://nz.snow-machine.com/accommodation/commonage-villas-3-bedroom/' },
+      { id:'lakehouse', name:'Lakehouse Villas', price:1862, stars:4.5, type:'Villa', sleeps:'6-8', location:'Lakeside', walk:'12 min', features:['🌊 Lakefront','🏡 Spacious','🔥 Fireplace','🎱 Games'], desc:'Lakefront villa life. Space for the whole squad, games room included.', link:'https://nz.snow-machine.com/accommodation/lakehouse-1/' },
+      { id:'viewsspa', name:'The Views and Spa', price:2146, stars:5, type:'Villa', sleeps:'8', location:'Queenstown Hill', walk:'15 min', features:['🛁 Hot tub','🌄 Incredible views','🏡 4 bed','💎 Luxury'], desc:'4-bed luxury villa with HOT TUB and incredible views. This is the dream.', link:'https://nz.snow-machine.com/accommodation/the-views-and-spa-4-bedroom/' },
+      { id:'shotover', name:'Shotover Penthouse & Spa', price:2365, stars:5, type:'Penthouse', sleeps:'6', location:'Central', walk:'3 min', features:['🛁 Private spa','🌆 Penthouse','💎 Ultra luxury','✨ Designer'], desc:'THE baller option. Penthouse with private spa. Ultimate flex.', link:'https://nz.snow-machine.com/accommodation/shotover-penthouse-and-spa-3-bedroom/' }
     ]
   }
 ];
@@ -569,9 +707,10 @@ function getMaxVotes() {
   return Math.max(0, ...allItems.map(i => getVote(i.id)));
 }
 
-function getPriceClass(label) {
-  const classes = { 'Budget': 'budget', 'Mid': 'mid', 'Premium': 'premium', 'Luxury': 'luxury' };
-  return classes[label] || 'mid';
+function renderStars(count) {
+  const full = Math.floor(count);
+  const half = count % 1 >= 0.5;
+  return '★'.repeat(full) + (half ? '½' : '');
 }
 
 function renderTableView() {
@@ -588,11 +727,13 @@ function renderTableView() {
       <table>
         <thead>
           <tr>
-            <th>🏨 Accommodation</th>
-            <th>💰 Price</th>
-            <th>🚶 Walk</th>
-            <th>🏷️ Tags</th>
-            <th>⭐ Votes</th>
+            <th>🏨 Name</th>
+            <th>⭐</th>
+            <th>💰 Package</th>
+            <th>💵 /Night</th>
+            <th>👥</th>
+            <th>📍 Location</th>
+            <th>🗳️</th>
           </tr>
         </thead>
         <tbody>
@@ -601,18 +742,21 @@ function renderTableView() {
     section.items.forEach(item => {
       const count = getVote(item.id);
       const isTop = count > 0 && count === maxVotes;
+      const perNight = Math.round(item.price / 7);
       html += `
         <tr class="${isTop ? 'top-pick' : ''}">
           <td>
             <strong>${item.name}</strong>
-            ${isTop ? '<span class="top-badge">🏆 TOP PICK</span>' : ''}
+            ${isTop ? '<span class="top-badge">🏆 TOP</span>' : ''}
           </td>
-          <td class="price-cell">${item.price}</td>
-          <td class="walk-time">${item.walk}</td>
-          <td>${item.tags.map(t => `<span class="table-tag">${t}</span>`).join('')}</td>
+          <td><span class="stars">${renderStars(item.stars)}</span></td>
+          <td class="price-cell">$${item.price.toLocaleString()}</td>
+          <td class="price-cell">~$${perNight}</td>
+          <td class="sleeps-cell">${item.sleeps}</td>
+          <td class="location-cell">${item.walk}</td>
           <td>
             <div class="vote-cell">
-              <button onclick="vote('${item.id}')">Vote ⭐</button>
+              <button onclick="vote('${item.id}')">+1</button>
               <span class="counter" id="${item.id}-count-table">${count}</span>
             </div>
           </td>
@@ -637,32 +781,71 @@ function renderCardView() {
         <span class="section-emoji">${section.emoji}</span>
         <h2>${section.title}</h2>
       </div>
-      <p style="color:#6b6560; margin-bottom:1rem;">${section.description}</p>
+      <p style="color:#6b6560; margin-bottom:1.5rem;">${section.description}</p>
       <div class="grid">
     `;
 
     section.items.forEach(item => {
       const count = getVote(item.id);
       const isTop = count > 0 && count === maxVotes;
+      const perNight = Math.round(item.price / 7);
+      const perNightPp = item.sleeps.includes('-') ? 
+        Math.round(perNight / parseInt(item.sleeps.split('-')[1])) :
+        Math.round(perNight / parseInt(item.sleeps));
+      
       html += `
         <div class="card ${isTop ? 'top-pick' : ''}">
           ${isTop ? '<div class="card-badge">🏆 TOP PICK</div>' : ''}
           <div class="card-header">
-            <span class="card-emoji">${section.emoji}</span>
-            <div>
+            <div class="card-title-row">
               <h3>${item.name}</h3>
-              <div class="card-meta">
-                <span class="price-tag">${item.price} ${item.priceLabel}</span> • 
-                <span class="walk-tag">📍 ${item.walk}</span>
-              </div>
+              <span class="card-stars">${renderStars(item.stars)}</span>
+            </div>
+            <div class="card-price-big">
+              <span class="amount">$${item.price.toLocaleString()}</span>
+              <span class="per">pp / 7 nights</span>
             </div>
           </div>
-          <div class="tags">
-            ${item.tags.map(t => `<span class="tag ${getPriceClass(item.priceLabel)}">${t}</span>`).join('')}
+          
+          <div class="card-details-grid">
+            <div class="card-detail">
+              <span class="label">💵 Per night:</span>
+              <span class="value">~$${perNight} total</span>
+            </div>
+            <div class="card-detail">
+              <span class="label">🛏️ Type:</span>
+              <span class="value">${item.type}</span>
+            </div>
+            <div class="card-detail">
+              <span class="label">👥 Sleeps:</span>
+              <span class="value">${item.sleeps} people</span>
+            </div>
+            <div class="card-detail">
+              <span class="label">📍 Walk:</span>
+              <span class="value">${item.walk}</span>
+            </div>
+            <div class="card-detail">
+              <span class="label">🗺️ Area:</span>
+              <span class="value">${item.location}</span>
+            </div>
+            <div class="card-detail">
+              <span class="label">⭐ Rating:</span>
+              <span class="value">${item.stars}-star</span>
+            </div>
           </div>
-          <div class="vote">
-            <button onclick="vote('${item.id}')">Vote ⭐</button>
-            <span class="counter" id="${item.id}-count-card">${count}</span>
+          
+          <div class="card-features">
+            ${item.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+          </div>
+          
+          <p class="card-description">${item.desc}</p>
+          
+          <div class="card-footer">
+            <a href="${item.link}" target="_blank" class="card-link">🔗 View on Snow Machine →</a>
+            <div class="vote">
+              <button onclick="vote('${item.id}')">Vote ⭐</button>
+              <span class="counter" id="${item.id}-count-card">${count}</span>
+            </div>
           </div>
         </div>
       `;
@@ -684,7 +867,6 @@ function vote(id) {
   const count = getVote(id) + 1;
   localStorage.setItem(key, count);
   
-  // Update counters with animation
   document.querySelectorAll(`[id^="${id}-count"]`).forEach(el => {
     el.textContent = count;
     el.classList.remove('pop');
@@ -692,7 +874,6 @@ function vote(id) {
     el.classList.add('pop');
   });
   
-  // Re-render to update TOP PICK badges
   render();
 }
 
@@ -723,7 +904,6 @@ function switchView(view) {
   }
 }
 
-// Initial render
 render();
 </script>
 </body>
