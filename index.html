@@ -3,238 +3,825 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Snow Machine Queenstown 2026 – Where to Stay</title>
+  <title>🏔️ Snow Machine Queenstown 2026 – Where to Stay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: radial-gradient(circle at top, #1b1147, #07060f 70%);
-      color: #f5f7fa;
-      line-height: 1.6;
+      padding: 0;
+      box-sizing: border-box;
     }
+    
+    body {
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(180deg, #faf8f5 0%, #f0ebe3 100%);
+      color: #3d3a36;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    
+    /* Header */
     header {
-      background: linear-gradient(135deg, #8b5cff, #ff4fd8, #ffb86c);
-      padding: 4rem 1.5rem;
+      background: linear-gradient(135deg, #5c8a6e, #7ba38a, #a8c5b5);
+      padding: 3rem 1.5rem;
       text-align: center;
+      border-bottom: 4px solid #4a7560;
     }
+    
     header h1 {
-      font-size: 3rem;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
       margin-bottom: 0.5rem;
     }
-    section {
-      max-width: 1200px;
-      margin: 3.5rem auto;
-      padding: 0 1.5rem;
+    
+    header p {
+      color: #e8f0eb;
+      font-size: 1.1rem;
+      font-weight: 600;
     }
+    
+    .dates-banner {
+      background: #4a7560;
+      color: #fff;
+      padding: 0.75rem;
+      text-align: center;
+      font-weight: 700;
+    }
+    
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    
+    /* Intro Section */
+    .intro {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border-left: 5px solid #7ba38a;
+    }
+    
+    .intro h2 {
+      color: #5c8a6e;
+      margin-bottom: 0.5rem;
+    }
+    
+    /* View Toggle */
+    .view-toggle {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      background: #e8e2d9;
+      padding: 0.5rem;
+      border-radius: 12px;
+      width: fit-content;
+    }
+    
+    .view-toggle button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: transparent;
+      color: #6b6560;
+    }
+    
+    .view-toggle button.active {
+      background: #5c8a6e;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(92, 138, 110, 0.3);
+    }
+    
+    .view-toggle button:hover:not(.active) {
+      background: rgba(92, 138, 110, 0.2);
+    }
+    
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 2.5rem 0 1.5rem 0;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid #d4cdc3;
+    }
+    
+    .section-header h2 {
+      font-size: 1.5rem;
+      color: #4a4540;
+    }
+    
+    .section-emoji {
+      font-size: 2rem;
+    }
+    
+    /* Table View */
+    .table-view {
+      display: none;
+      overflow-x: auto;
+    }
+    
+    .table-view.active {
+      display: block;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      margin-bottom: 2rem;
+    }
+    
+    th {
+      background: #5c8a6e;
+      color: #fff;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 700;
+    }
+    
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid #e8e2d9;
+      vertical-align: top;
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    tr:hover {
+      background: #f8f6f3;
+    }
+    
+    .table-tag {
+      display: inline-block;
+      background: #e8f0eb;
+      color: #4a7560;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin: 0.15rem;
+    }
+    
+    .price-cell {
+      font-weight: 700;
+      color: #8b7355;
+    }
+    
+    .walk-time {
+      color: #5c8a6e;
+      font-weight: 600;
+    }
+    
+    /* Card View */
+    .card-view {
+      display: none;
+    }
+    
+    .card-view.active {
+      display: block;
+    }
+    
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
     }
+    
     .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      background: #fff;
       border-radius: 20px;
       padding: 1.75rem;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
     }
-    .card img {
-      width: 100%;
-      border-radius: 14px;
+    
+    .card:hover {
+      border-color: #7ba38a;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    }
+    
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
       margin-bottom: 1rem;
     }
+    
+    .card-emoji {
+      font-size: 2.5rem;
+    }
+    
+    .card h3 {
+      color: #3d3a36;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    
     .tag {
       display: inline-block;
-      background: rgba(255,255,255,0.15);
-      padding: 0.3rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      margin-right: 0.4rem;
+      background: #e8f0eb;
+      color: #4a7560;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
     }
+    
+    .tag.premium {
+      background: #f5ebe0;
+      color: #8b7355;
+    }
+    
+    .tag.warning {
+      background: #f8e8e8;
+      color: #a85454;
+    }
+    
+    .card-details {
+      color: #5a5652;
+      margin-bottom: 1rem;
+    }
+    
+    .card-details p {
+      margin-bottom: 0.5rem;
+    }
+    
+    .highlight {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #5c8a6e;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    
     .price {
-      margin-top: 0.75rem;
-      font-weight: 600;
-      color: #ffb86c;
+      background: linear-gradient(135deg, #f5ebe0, #efe5d8);
+      padding: 1rem;
+      border-radius: 12px;
+      margin-top: 1rem;
     }
+    
+    .price-label {
+      font-size: 0.85rem;
+      color: #8b7355;
+      font-weight: 600;
+    }
+    
+    .price-value {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #6b5a45;
+    }
+    
+    .vote {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
     .vote button {
-      background: linear-gradient(135deg, #ff4fd8, #8b5cff);
+      background: linear-gradient(135deg, #5c8a6e, #7ba38a);
       border: none;
       color: #fff;
-      padding: 0.6rem 1.2rem;
-      border-radius: 999px;
+      padding: 0.6rem 1.25rem;
+      border-radius: 25px;
       cursor: pointer;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
     }
-    .counter { font-size: 1.2rem; font-weight: 700; margin-left: 0.5rem; }
-  @keyframes pop { 0% { transform: scale(0.8); opacity: 0.6; } 100% { transform: scale(1); opacity: 1; } }
-</style>
+    
+    .vote button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(92, 138, 110, 0.4);
+    }
+    
+    .counter {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #5c8a6e;
+    }
+    
+    /* Avoid Section */
+    .avoid-card {
+      border: 2px dashed #d4a5a5;
+      background: #fdf8f8;
+    }
+    
+    .avoid-card:hover {
+      border-color: #c48a8a;
+    }
+    
+    /* CTA Section */
+    .cta {
+      background: linear-gradient(135deg, #5c8a6e, #4a7560);
+      border-radius: 20px;
+      padding: 2.5rem;
+      color: #fff;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    
+    .cta h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+    
+    .cta-dates {
+      background: rgba(255,255,255,0.2);
+      padding: 1.25rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      font-size: 1.1rem;
+    }
+    
+    .cta-dates strong {
+      color: #ffd9a0;
+    }
+    
+    .cta-warning {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffd9a0;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #8a847d;
+      font-weight: 600;
+    }
+    
+    /* Animations */
+    @keyframes pop {
+      0% { transform: scale(0.8); opacity: 0.6; }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .pop {
+      animation: pop 0.3s ease-out;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.75rem;
+      }
+      
+      .view-toggle {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      table {
+        font-size: 0.85rem;
+      }
+      
+      th, td {
+        padding: 0.75rem 0.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
 <header>
-  <h1>Snow Machine Queenstown 2026</h1>
-  <p>Where to stay • Walkable • Group-friendly • No rash hotels ❌</p>
+  <h1>🏔️ Snow Machine Queenstown 2026 ⛷️</h1>
+  <p>🏠 Where to Stay • 🚶 Walkable • 👯 Group-friendly • 🚫 No dodgy hotels</p>
 </header>
 
-<section>
-  <p class="intro">
-    This guide is for anyone heading to <strong>Snow Machine Queenstown 2026</strong> (8–15 September). 
-    The goal: stay central, walk everywhere, be close to après, transport, ski pickup, and still have space to recover.
-  </p>
-</section>
-
-<section>
-  <h2>🔥 Best Central Picks (Walk to Everything)</h2>
-  <div class="grid">
-    <div class="card">
-  <img src="https://maps.googleapis.com/maps/api/staticmap?center=Queenstown+NZ&zoom=15&size=600x300&markers=color:purple%7CQueenstown+NZ" alt="Map location screenshot">
-  <h3>Four Seasons Resort Queenstown</h3>
-  <span class="tag">Ultra Central</span>
-  <span class="tag">Ski-in vibes</span>
-  <p>Right next to ski access, gear pickup, pass issues, and walking distance to literally everything. Zero buses required.</p>
-  <p class="price">💰💰💰 High · ~$950–$1,150 pp (quad, package est.)</p>
-  <div class="vote">
-    <button onclick="vote('four-seasons')">Vote ⭐</button>
-    <span id="four-seasons-count">0</span>
-  </div>
+<div class="dates-banner">
+  📅 8–15 September 2026 • 📍 Queenstown, New Zealand
 </div>
-      <p class="good">✔ 5–8 min walk to town</p>
-      <p>Close to Queenstown Gardens. Perfect balance of space + location.</p>
+
+<div class="container">
+  
+  <div class="intro">
+    <h2>👋 Hey legends!</h2>
+    <p>
+      This guide is for everyone heading to <strong>Snow Machine Queenstown 2026</strong>! 
+      The goal: stay central 🎯, walk everywhere 🚶, be close to après-ski 🍻, transport 🚌, ski pickup ⛷️, and still have space to recover 😴.
+    </p>
+  </div>
+
+  <!-- View Toggle -->
+  <div class="view-toggle">
+    <button class="active" onclick="switchView('table')">📊 Table View</button>
+    <button onclick="switchView('cards')">🃏 Card View</button>
+  </div>
+
+  <!-- ============ TABLE VIEW ============ -->
+  <div class="table-view active" id="table-view">
+    
+    <div class="section-header">
+      <span class="section-emoji">🔥</span>
+      <h2>Best Central Picks (Walk to Everything)</h2>
+    </div>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>🏨 Accommodation</th>
+          <th>📍 Location</th>
+          <th>🚶 Walk to Town</th>
+          <th>👥 Best For</th>
+          <th>💰 Price (pp/week)</th>
+          <th>⭐ Votes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>🌟 Ramada Suites</strong><br><span class="table-tag">Ultra Central</span></td>
+          <td>Queenstown Central</td>
+          <td class="walk-time">⚡ 2 min</td>
+          <td>Couples, Small groups</td>
+          <td class="price-cell">$650–$850</td>
+          <td><button onclick="vote('ramada')">Vote</button> <span id="ramada-count" class="counter">0</span></td>
+        </tr>
+        <tr>
+          <td><strong>🏡 Queenstown House</strong><br><span class="table-tag">Group House</span></td>
+          <td>Near Queenstown Gardens</td>
+          <td class="walk-time">🚶 5–8 min</td>
+          <td>Big groups (6-10)</td>
+          <td class="price-cell">$550–$750</td>
+          <td><button onclick="vote('qthouse')">Vote</button> <span id="qthouse-count" class="counter">0</span></td>
+        </tr>
+        <tr>
+          <td><strong>🏢 LQ Apartments</strong><br><span class="table-tag">Modern</span></td>
+          <td>Lake Wakatipu views</td>
+          <td class="walk-time">🚶 6 min</td>
+          <td>Couples, Friends</td>
+          <td class="price-cell">$700–$900</td>
+          <td><button onclick="vote('lq')">Vote</button> <span id="lq-count" class="counter">0</span></td>
+        </tr>
+        <tr>
+          <td><strong>🛋️ The Beacon Apartments</strong><br><span class="table-tag">Spacious</span></td>
+          <td>Central Queenstown</td>
+          <td class="walk-time">🚶 10 min</td>
+          <td>Groups wanting space</td>
+          <td class="price-cell">$600–$800</td>
+          <td><button onclick="vote('beacon')">Vote</button> <span id="beacon-count" class="counter">0</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-header">
+      <span class="section-emoji">✨</span>
+      <h2>Premium / Scenic Options</h2>
+    </div>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>🏨 Accommodation</th>
+          <th>📍 Location</th>
+          <th>🚶 Walk to Town</th>
+          <th>👥 Best For</th>
+          <th>💰 Price (pp/week)</th>
+          <th>⭐ Votes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>🌲 Four Seasons Resort</strong><br><span class="table-tag">Luxury</span><span class="table-tag">Ski-in vibes</span></td>
+          <td>Near ski access</td>
+          <td class="walk-time">🚶 12 min</td>
+          <td>Treat yourself crew</td>
+          <td class="price-cell">$950–$1,150</td>
+          <td><button onclick="vote('fourseasons')">Vote</button> <span id="fourseasons-count" class="counter">0</span></td>
+        </tr>
+        <tr>
+          <td><strong>🌊 Hilton Queenstown</strong><br><span class="table-tag">Lakefront</span><span class="table-tag">Resort</span></td>
+          <td>Kawarau Village</td>
+          <td class="walk-time">🚌 Bus needed</td>
+          <td>Luxury lovers</td>
+          <td class="price-cell">$900–$1,100</td>
+          <td><button onclick="vote('hilton')">Vote</button> <span id="hilton-count" class="counter">0</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-header">
+      <span class="section-emoji">⚠️</span>
+      <h2>What We're Avoiding</h2>
+    </div>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>🏨 Place</th>
+          <th>😬 Why We're Skipping It</th>
+          <th>🚶 Distance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>❌ Fernhill Motels</strong></td>
+          <td>Way too far, steep hill, need car/bus every time 😩</td>
+          <td class="walk-time">🚌 25+ min walk uphill</td>
+        </tr>
+        <tr>
+          <td><strong>❌ Frankton Accommodations</strong></td>
+          <td>Near airport but middle of nowhere for nightlife 🛫</td>
+          <td class="walk-time">🚌 Bus required</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============ CARD VIEW ============ -->
+  <div class="card-view" id="card-view">
+    
+    <div class="section-header">
+      <span class="section-emoji">🔥</span>
+      <h2>Best Central Picks (Walk to Everything)</h2>
+    </div>
+    
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-emoji">🌟</span>
+          <div>
+            <h3>Ramada Suites Queenstown</h3>
+            <div class="tags">
+              <span class="tag">⚡ Ultra Central</span>
+              <span class="tag">🛏️ Modern Suites</span>
+            </div>
+          </div>
+        </div>
+        <div class="highlight">✅ 2 min walk to town centre!</div>
+        <div class="card-details">
+          <p>🎯 Right in the heart of everything. Roll out of bed and you're basically at the bars, restaurants, and ski bus pickup.</p>
+          <p>🏠 Perfect for couples or small groups wanting comfort + convenience.</p>
+        </div>
+        <div class="price">
+          <div class="price-label">💰 Estimated per person (quad share, 7 nights)</div>
+          <div class="price-value">$650–$850 NZD</div>
+        </div>
+        <div class="vote">
+          <button onclick="vote('ramada')">Vote ⭐</button>
+          <span id="ramada-count2" class="counter">0</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-emoji">🏡</span>
+          <div>
+            <h3>Queenstown House B&B</h3>
+            <div class="tags">
+              <span class="tag">👯 Group Friendly</span>
+              <span class="tag">🌳 Gardens Area</span>
+            </div>
+          </div>
+        </div>
+        <div class="highlight">✅ 5–8 min walk to town</div>
+        <div class="card-details">
+          <p>🏠 Beautiful house vibes near Queenstown Gardens. Perfect balance of space + location.</p>
+          <p>👥 Ideal for larger groups (6-10) wanting that house party energy while still being walkable to everything.</p>
+        </div>
+        <div class="price">
+          <div class="price-label">💰 Estimated per person (group share, 7 nights)</div>
+          <div class="price-value">$550–$750 NZD</div>
+        </div>
+        <div class="vote">
+          <button onclick="vote('qthouse')">Vote ⭐</button>
+          <span id="qthouse-count2" class="counter">0</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-emoji">🏢</span>
+          <div>
+            <h3>LQ Apartments</h3>
+            <div class="tags">
+              <span class="tag">🌊 Lake Views</span>
+              <span class="tag">✨ Modern</span>
+            </div>
+          </div>
+        </div>
+        <div class="highlight">✅ 6 min walk + scenic route</div>
+        <div class="card-details">
+          <p>😍 Modern apartments with stunning Lake Wakatipu views. Great for Insta content!</p>
+          <p>🛋️ Plenty of space to chill between ski sessions and big nights out.</p>
+        </div>
+        <div class="price">
+          <div class="price-label">💰 Estimated per person (quad share, 7 nights)</div>
+          <div class="price-value">$700–$900 NZD</div>
+        </div>
+        <div class="vote">
+          <button onclick="vote('lq')">Vote ⭐</button>
+          <span id="lq-count2" class="counter">0</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-emoji">🛋️</span>
+          <div>
+            <h3>The Beacon Apartments</h3>
+            <div class="tags">
+              <span class="tag">📐 Spacious</span>
+              <span class="tag">🎿 Gear Storage</span>
+            </div>
+          </div>
+        </div>
+        <div class="highlight">✅ 10 min walk to centre</div>
+        <div class="card-details">
+          <p>🏠 Comfort upgrade without losing convenience. Big apartments = room for all the ski gear!</p>
+          <p>😴 Great for those who need recovery space between sessions.</p>
+        </div>
+        <div class="price">
+          <div class="price-label">💰 Estimated per person (quad share, 7 nights)</div>
+          <div class="price-value">$600–$800 NZD</div>
+        </div>
+        <div class="vote">
+          <button onclick="vote('beacon')">Vote ⭐</button>
+          <span id="beacon-count2" class="counter">0</span>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-  <img src="https://maps.googleapis.com/maps/api/staticmap?center=Queenstown+NZ&zoom=15&size=600x300&markers=color:purple%7CQueenstown+NZ" alt="Map location screenshot">
-  <h3>Four Seasons Resort Queenstown</h3>
-  <span class="tag">Ultra Central</span>
-  <span class="tag">Ski-in vibes</span>
-  <p>Right next to ski access, gear pickup, pass issues, and walking distance to literally everything. Zero buses required.</p>
-  <p class="price">💰💰💰 High · ~$950–$1,150 pp (quad, package est.)</p>
-  <div class="vote">
-    <button onclick="vote('four-seasons')">Vote ⭐</button>
-    <span id="four-seasons-count">0</span>
-  </div>
-</div>
-      <p class="good">✔ Central & social</p>
-      <p>Ideal for larger groups wanting a house vibe.</p>
+    <div class="section-header">
+      <span class="section-emoji">✨</span>
+      <h2>Premium / Scenic Options</h2>
+    </div>
+    
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-emoji">🌲</span>
+          <div>
+            <h3>Four Seasons Resort Queenstown</h3>
+            <div class="tags">
+              <span class="tag premium">👑 Luxury</span>
+              <span class="tag premium">⛷️ Ski-in Vibes</span>
+            </div>
+          </div>
+        </div>
+        <div class="highlight">✅ Near ski access & gear pickup</div>
+        <div class="card-details">
+          <p>💎 The bougie option! Right next to ski facilities, walking distance to town. Zero buses required.</p>
+          <p>🥂 For those who want to treat themselves and live that luxury ski life.</p>
+        </div>
+        <div class="price">
+          <div class="price-label">💰 Estimated per person (quad share, 7 nights)</div>
+          <div class="price-value">$950–$1,150 NZD</div>
+        </div>
+        <div class="vote">
+          <button onclick="vote('fourseasons')">Vote ⭐</button>
+          <span id="fourseasons-count2" class="counter">0</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-emoji">🌊</span>
+          <div>
+            <h3>Hilton Queenstown Resort</h3>
+            <div class="tags">
+              <span class="tag premium">🏖️ Lakefront</span>
+              <span class="tag premium">🏨 Full Resort</span>
+            </div>
+          </div>
+        </div>
+        <div class="highlight">⚠️ Bus needed to town centre</div>
+        <div class="card-details">
+          <p>🌅 Stunning lakefront location in Kawarau Village. Resort amenities galore!</p>
+          <p>🚌 Trade-off: You'll need transport to get to the main action, but the views are worth it for some.</p>
+        </div>
+        <div class="price">
+          <div class="price-label">💰 Estimated per person (quad share, 7 nights)</div>
+          <div class="price-value">$900–$1,100 NZD</div>
+        </div>
+        <div class="vote">
+          <button onclick="vote('hilton')">Vote ⭐</button>
+          <span id="hilton-count2" class="counter">0</span>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-  <img src="https://maps.googleapis.com/maps/api/staticmap?center=Queenstown+NZ&zoom=15&size=600x300&markers=color:purple%7CQueenstown+NZ" alt="Map location screenshot">
-  <h3>Four Seasons Resort Queenstown</h3>
-  <span class="tag">Ultra Central</span>
-  <span class="tag">Ski-in vibes</span>
-  <p>Right next to ski access, gear pickup, pass issues, and walking distance to literally everything. Zero buses required.</p>
-  <p class="price">💰💰💰 High · ~$950–$1,150 pp (quad, package est.)</p>
-  <div class="vote">
-    <button onclick="vote('four-seasons')">Vote ⭐</button>
-    <span id="four-seasons-count">0</span>
-  </div>
-</div>
-      <p class="good">✔ Walkable + scenic</p>
-      <p>Modern apartments with room to chill between events.</p>
+    <div class="section-header">
+      <span class="section-emoji">⚠️</span>
+      <h2>What We're Avoiding</h2>
     </div>
+    
+    <div class="grid">
+      <div class="card avoid-card">
+        <div class="card-header">
+          <span class="card-emoji">❌</span>
+          <div>
+            <h3>Fernhill Area Motels</h3>
+            <div class="tags">
+              <span class="tag warning">😩 Too Far</span>
+              <span class="tag warning">🏔️ Steep Hill</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-details">
+          <p>🚫 Way too far from town. That steep hill will destroy you after a big night!</p>
+          <p>🚌 You'll need a car or bus literally every time you want to do anything. Hard pass.</p>
+        </div>
+      </div>
 
-    <div class="card">
-  <img src="https://maps.googleapis.com/maps/api/staticmap?center=Queenstown+NZ&zoom=15&size=600x300&markers=color:purple%7CQueenstown+NZ" alt="Map location screenshot">
-  <h3>Four Seasons Resort Queenstown</h3>
-  <span class="tag">Ultra Central</span>
-  <span class="tag">Ski-in vibes</span>
-  <p>Right next to ski access, gear pickup, pass issues, and walking distance to literally everything. Zero buses required.</p>
-  <p class="price">💰💰💰 High · ~$950–$1,150 pp (quad, package est.)</p>
-  <div class="vote">
-    <button onclick="vote('four-seasons')">Vote ⭐</button>
-    <span id="four-seasons-count">0</span>
-  </div>
-</div>
-      <p class="good">✔ 10 min walk to centre</p>
-      <p>Comfort upgrade without losing convenience.</p>
+      <div class="card avoid-card">
+        <div class="card-header">
+          <span class="card-emoji">❌</span>
+          <div>
+            <h3>Frankton Accommodations</h3>
+            <div class="tags">
+              <span class="tag warning">🛫 Near Airport</span>
+              <span class="tag warning">🏜️ Middle of Nowhere</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-details">
+          <p>🚫 Sure it's near the airport, but you're not here to hang at the airport!</p>
+          <p>😴 Zero nightlife, zero walkability. You'll feel isolated from all the action.</p>
+        </div>
+      </div>
     </div>
   </div>
-</section>
 
-<section>
-  <h2>✨ Premium / Scenic Options</h2>
-  <div class="grid">
-    <div class="card">
-  <img src="https://maps.googleapis.com/maps/api/staticmap?center=Queenstown+NZ&zoom=15&size=600x300&markers=color:purple%7CQueenstown+NZ" alt="Map location screenshot">
-  <h3>Four Seasons Resort Queenstown</h3>
-  <span class="tag">Ultra Central</span>
-  <span class="tag">Ski-in vibes</span>
-  <p>Right next to ski access, gear pickup, pass issues, and walking distance to literally everything. Zero buses required.</p>
-  <p class="price">💰💰💰 High · ~$950–$1,150 pp (quad, package est.)</p>
-  <div class="vote">
-    <button onclick="vote('four-seasons')">Vote ⭐</button>
-    <span id="four-seasons-count">0</span>
+  <!-- CTA Section -->
+  <div class="cta">
+    <h2>⏰ Booking Reality Check</h2>
+    <div class="cta-dates">
+      <p>🎫 <strong>Presale:</strong> Tue 3 Feb – 5PM AEDT</p>
+      <p>🌐 <strong>General Sale:</strong> Wed 4 Feb – 9AM AEDT</p>
+    </div>
+    <p class="cta-warning">🔥 Apartments sell out FIRST! Melbourne crew will absolutely descend. Be ready to book fast! 🏃‍♂️💨</p>
   </div>
+
 </div>
-
-    <div class="card">
-  <img src="https://maps.googleapis.com/maps/api/staticmap?center=Queenstown+NZ&zoom=15&size=600x300&markers=color:purple%7CQueenstown+NZ" alt="Map location screenshot">
-  <h3>Four Seasons Resort Queenstown</h3>
-  <span class="tag">Ultra Central</span>
-  <span class="tag">Ski-in vibes</span>
-  <p>Right next to ski access, gear pickup, pass issues, and walking distance to literally everything. Zero buses required.</p>
-  <p class="price">💰💰💰 High · ~$950–$1,150 pp (quad, package est.)</p>
-  <div class="vote">
-    <button onclick="vote('four-seasons')">Vote ⭐</button>
-    <span id="four-seasons-count">0</span>
-  </div>
-</div>
-  </div>
-</section>
-
-<section>
-  <h2>⚠️ What We're Avoiding</h2>
-  <div class="grid">
-    <div class="card">
-  <img src="https://maps.googleapis.com/maps/api/staticmap?center=Queenstown+NZ&zoom=15&size=600x300&markers=color:purple%7CQueenstown+NZ" alt="Map location screenshot">
-  <h3>Four Seasons Resort Queenstown</h3>
-  <span class="tag">Ultra Central</span>
-  <span class="tag">Ski-in vibes</span>
-  <p>Right next to ski access, gear pickup, pass issues, and walking distance to literally everything. Zero buses required.</p>
-  <p class="price">💰💰💰 High · ~$950–$1,150 pp (quad, package est.)</p>
-  <div class="vote">
-    <button onclick="vote('four-seasons')">Vote ⭐</button>
-    <span id="four-seasons-count">0</span>
-  </div>
-</div>
-
-    <div class="card">
-  <img src="https://maps.googleapis.com/maps/api/staticmap?center=Queenstown+NZ&zoom=15&size=600x300&markers=color:purple%7CQueenstown+NZ" alt="Map location screenshot">
-  <h3>Four Seasons Resort Queenstown</h3>
-  <span class="tag">Ultra Central</span>
-  <span class="tag">Ski-in vibes</span>
-  <p>Right next to ski access, gear pickup, pass issues, and walking distance to literally everything. Zero buses required.</p>
-  <p class="price">💰💰💰 High · ~$950–$1,150 pp (quad, package est.)</p>
-  <div class="vote">
-    <button onclick="vote('four-seasons')">Vote ⭐</button>
-    <span id="four-seasons-count">0</span>
-  </div>
-</div>
-  </div>
-</section>
-
-<section class="cta">
-  <h2>⏰ Booking Reality Check</h2>
-  <p>
-    <strong>Presale:</strong> Tue 3 Feb – 5PM AEDT<br />
-    <strong>General Sale:</strong> Wed 4 Feb – 9AM AEDT
-  </p>
-  <p>
-    Apartments sell out first. Melbourne will absolutely descend. Be ready.
-  </p>
-</section>
 
 <footer>
-  Built for sharing with the group • Snow Machine Queenstown 2026
+  🏔️ Built with love for the Snow Machine 2026 crew • Let's gooo! 🎿🍻
 </footer>
 
 <script>
   const votes = {};
+  
   function vote(id) {
     votes[id] = (votes[id] || 0) + 1;
-    const el = document.getElementById(id + '-count');
-    el.textContent = votes[id];
-    el.style.animation = 'pop 0.25s ease-out';
+    
+    // Update all elements with this ID (table + card view)
+    document.querySelectorAll(`[id^="${id}-count"]`).forEach(el => {
+      el.textContent = votes[id];
+      el.classList.remove('pop');
+      void el.offsetWidth; // Trigger reflow
+      el.classList.add('pop');
+    });
+  }
+  
+  function switchView(view) {
+    const tableView = document.getElementById('table-view');
+    const cardView = document.getElementById('card-view');
+    const buttons = document.querySelectorAll('.view-toggle button');
+    
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    if (view === 'table') {
+      tableView.classList.add('active');
+      cardView.classList.remove('active');
+      buttons[0].classList.add('active');
+    } else {
+      tableView.classList.remove('active');
+      cardView.classList.add('active');
+      buttons[1].classList.add('active');
+    }
   }
 </script>
 </body>
