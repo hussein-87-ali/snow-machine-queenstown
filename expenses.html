@@ -910,7 +910,7 @@
         bookedBy: 'Sharon',
         payments: {
           Sam: { amount: 173, status: 'unpaid' },
-          Huss: { amount: 173, status: 'unpaid' },
+          Huss: { amount: 173, status: 'paid' },
           Sharon: { amount: 173, status: 'paid' },
           Jhye: { amount: 173, status: 'unpaid' }
         }
@@ -924,7 +924,7 @@
         bookedBy: 'Sharon',
         payments: {
           Sam: { amount: 343.5, status: 'unpaid' },
-          Huss: { amount: 343.5, status: 'unpaid' },
+          Huss: { amount: 343.5, status: 'paid' },
           Sharon: { amount: 343.5, status: 'paid' },
           Jhye: { amount: 343.5, status: 'unpaid' }
         }
@@ -961,8 +961,8 @@
       {
         id: 9,
         item: 'Flights Cancun to Houston',
-        total: 1689.6,
-        perPerson: 422.4,
+        total: 1954.8,
+        perPerson: 488.7,
         bookedBy: 'Sam',
         bookedBySecondary: 'Huss',
         note: 'Sam booked for Sam+Jhye ($488.70 each), Huss booked for Huss+Sharon ($356.30 each)',
@@ -988,6 +988,20 @@
       },
       {
         id: 11,
+        item: 'Chicago Accommodation',
+        total: 3511,
+        nights: 3,
+        perPerson: 877.75,
+        bookedBy: 'Sam',
+        payments: {
+          Sam: { amount: 877.75, status: 'paid' },
+          Huss: { amount: 877.75, status: 'unpaid' },
+          Sharon: { amount: 877.75, status: 'unpaid' },
+          Jhye: { amount: 877.75, status: 'paid' }
+        }
+      },
+      {
+        id: 12,
         item: 'Flights Chicago to LA',
         total: 1198,
         perPerson: 299.5,
