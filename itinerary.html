@@ -792,9 +792,9 @@
       { id: "f8", date: "2026-05-13", period: "AM", type: "stay", title: "Palm Springs check-out", time: "11:00 AM", location: "Palm Springs", details: "Checkout" },
       { id: "f9", date: "2026-05-13", period: "PM", type: "stay", title: "Planet Hollywood check-in", time: "4:00 PM", location: "Las Vegas", details: "Check-in" },
       { id: "f10", date: "2026-05-15", period: "AM", type: "transport", title: "Avis drop off", time: "9:00 AM", location: "Bellagio area", details: "Rental return" },
-      { id: "f11", date: "2026-05-16", period: "PM", type: "event", title: "EDC Las Vegas", time: "Evening", location: "Las Vegas Motor Speedway", details: "Festival day" },
-      { id: "f12", date: "2026-05-17", period: "PM", type: "event", title: "EDC Las Vegas", time: "Evening", location: "Las Vegas Motor Speedway", details: "Festival day" },
-      { id: "f13", date: "2026-05-18", period: "PM", type: "event", title: "EDC Las Vegas", time: "Evening", location: "Las Vegas Motor Speedway", details: "Festival day" },
+      { id: "f11", date: "2026-05-15", period: "PM", type: "event", title: "EDC Las Vegas", time: "Evening", location: "Las Vegas Motor Speedway", details: "Festival Day 1 – Friday" },
+      { id: "f12", date: "2026-05-16", period: "PM", type: "event", title: "EDC Las Vegas", time: "Evening", location: "Las Vegas Motor Speedway", details: "Festival Day 2 – Saturday" },
+      { id: "f13", date: "2026-05-17", period: "PM", type: "event", title: "EDC Las Vegas", time: "Evening", location: "Las Vegas Motor Speedway", details: "Festival Day 3 – Sunday" },
       { id: "f14", date: "2026-05-19", period: "AM", type: "stay", title: "Planet Hollywood check-out", time: "11:00 AM", location: "Las Vegas", details: "Checkout" },
       { id: "f15", date: "2026-05-19", period: "AM", type: "flight", title: "LAS to ATL", time: "12:34 AM", location: "LAS", details: "Delta DL857" },
       { id: "f16", date: "2026-05-19", period: "AM", type: "flight", title: "ATL to CUN", time: "8:15 AM", location: "ATL", details: "Delta DL1964" },
@@ -864,7 +864,9 @@
       const end = toDate(endDate);
 
       while (current <= end) {
-        const iso = current.toISOString().slice(0, 10);
+        const iso = current.getFullYear() + '-' +
+          String(current.getMonth() + 1).padStart(2, '0') + '-' +
+          String(current.getDate()).padStart(2, '0');
         list.push(iso);
         current.setDate(current.getDate() + 1);
       }
