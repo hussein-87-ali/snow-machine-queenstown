@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USA EDC 2026 Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-1: #f7f4eb;
+      --bg-2: #efe7d7;
+      --ink: #1f2a22;
+      --muted: #526257;
+      --panel: #fffdf8;
+      --border: #d9d2c0;
+      --brand: #335c4a;
+      --brand-soft: #dbe8e1;
+      --accent: #b25733;
+      --accent-soft: #f8e4da;
+      --good: #2f7a48;
+      --warn: #9e5f21;
+      --danger: #9d2d2d;
+      --shadow: 0 12px 28px rgba(29, 44, 34, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Space Grotesk", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #fff8e8 0%, transparent 38%),
+        radial-gradient(circle at 90% 15%, #e6f0ea 0%, transparent 32%),
+        linear-gradient(160deg, var(--bg-1), var(--bg-2));
+      line-height: 1.45;
+    }
+
+    .shell {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+
+    header {
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+      background: linear-gradient(120deg, #234337, #335c4a 50%, #4b7a65);
+      color: #f7fff9;
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.11);
+      right: -60px;
+      top: -80px;
+    }
+
+    .headline {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .headline h1 {
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+      margin-bottom: 0.3rem;
+    }
+
+    .headline p {
+      color: #dbefe6;
+    }
+
+    .top-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .top-links a,
+    .top-links button,
+    .panel button,
+    .modal button,
+    .planner-column button,
+    .view-switch button {
+      font-family: inherit;
+      font-weight: 600;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .top-links a,
+    .top-links button {
+      text-decoration: none;
+      color: #224337;
+      background: #fff8eb;
+      padding: 0.55rem 0.9rem;
+      font-size: 0.92rem;
+    }
+
+    .top-links button {
+      border-color: rgba(255, 255, 255, 0.4);
+      color: #fff;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .top-links a:hover,
+    .top-links button:hover,
+    .panel button:hover,
+    .planner-column button:hover,
+    .view-switch button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(12, 31, 22, 0.16);
+    }
+
+    .status-strip {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill {
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.17);
+      color: #f2fff6;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      padding: 0.3rem 0.65rem;
+      white-space: nowrap;
+    }
+
+    .content {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 1rem;
+    }
+
+    .panel {
+      background: var(--panel);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 1rem;
+      animation: rise 0.45s ease;
+    }
+
+    .panel h2 {
+      font-family: "Sora", sans-serif;
+      font-size: 1.02rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin: 0.45rem 0;
+    }
+
+    .legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      flex-shrink: 0;
+    }
+
+    .lc-flight { background: #d8f0ff; }
+    .lc-stay { background: #efe6ff; }
+    .lc-transport { background: #fff1d6; }
+    .lc-event { background: #e0f5dd; }
+    .lc-custom { background: #fce2cc; }
+
+    .panel button {
+      margin-top: 0.8rem;
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      background: var(--brand);
+      color: #f6fff8;
+      border-color: #2b4f3f;
+    }
+
+    .view-shell {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: rise 0.55s ease;
+    }
+
+    .view-switch {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.65rem;
+      padding: 0.85rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, #fffefb, #f7f1e7);
+    }
+
+    .view-tabs {
+      display: inline-flex;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .view-tabs button {
+      padding: 0.6rem 0.95rem;
+      border-radius: 0;
+      border: none;
+      background: transparent;
+      color: #516458;
+    }
+
+    .view-tabs button.active {
+      background: var(--brand);
+      color: #f2fff6;
+    }
+
+    .date-jump {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .date-jump label {
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .date-jump select {
+      font: inherit;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.5rem 0.65rem;
+      background: #fff;
+      min-width: 180px;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 0.55rem;
+      padding: 0.9rem;
+    }
+
+    .dow {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #6b766f;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .day-card {
+      border: 1px solid var(--border);
+      background: #fffcf6;
+      border-radius: 11px;
+      min-height: 128px;
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .day-card:hover {
+      border-color: #9bb5a7;
+      transform: translateY(-2px);
+    }
+
+    .day-card.selected {
+      border: 2px solid var(--brand);
+      background: #f7fbf8;
+    }
+
+    .day-card .date-label {
+      font-size: 0.79rem;
+      color: #53645a;
+      font-weight: 700;
+    }
+
+    .day-card .small-chip {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 0.16rem 0.44rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #2a3c32;
+      margin-right: 0.2rem;
+      margin-bottom: 0.18rem;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .chip-flight { background: #d8f0ff; }
+    .chip-stay { background: #efe6ff; }
+    .chip-transport { background: #fff1d6; }
+    .chip-event { background: #e0f5dd; }
+    .chip-custom { background: #fce2cc; }
+
+    .conflict-dot {
+      margin-left: auto;
+      color: var(--danger);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .day-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, #fffef9, #f4eddf);
+    }
+
+    .day-head h3 {
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    }
+
+    .danger-box {
+      border: 1px solid #f2cec4;
+      background: #fff0ed;
+      color: #86322a;
+      border-radius: 10px;
+      padding: 0.55rem 0.7rem;
+      font-size: 0.85rem;
+      max-width: 390px;
+    }
+
+    .planner-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+      padding: 0.9rem;
+    }
+
+    .planner-column {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fffefb;
+      min-height: 380px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .planner-column header {
+      background: linear-gradient(180deg, #f7f0e4, #f0e8d7);
+      color: #2d4238;
+      border: none;
+      border-radius: 12px 12px 0 0;
+      padding: 0.7rem;
+      box-shadow: none;
+      overflow: visible;
+    }
+
+    .planner-column header::after {
+      display: none;
+    }
+
+    .planner-column .col-meta {
+      font-size: 0.82rem;
+      color: #57675d;
+      margin-top: 0.2rem;
+    }
+
+    .planner-column .add-btn {
+      margin: 0.8rem;
+      padding: 0.5rem 0.6rem;
+      border: 1px dashed #8ca79a;
+      color: #2e4a3d;
+      background: #eff6f2;
+    }
+
+    .event-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      padding: 0 0.8rem 0.8rem;
+      overflow: auto;
+    }
+
+    .event-card {
+      border: 1px solid var(--border);
+      border-left-width: 6px;
+      border-radius: 10px;
+      padding: 0.6rem;
+      background: #fff;
+      animation: rise 0.35s ease;
+    }
+
+    .event-card.type-flight { border-left-color: #5da8cf; }
+    .event-card.type-stay { border-left-color: #8362b8; }
+    .event-card.type-transport { border-left-color: #d09438; }
+    .event-card.type-event { border-left-color: #4f9b57; }
+    .event-card.type-custom { border-left-color: #ba6b37; }
+
+    .event-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    .event-title {
+      font-size: 0.93rem;
+      font-weight: 700;
+      color: #1f2d25;
+    }
+
+    .event-time {
+      font-size: 0.78rem;
+      color: #53645a;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .event-meta {
+      margin-top: 0.35rem;
+      font-size: 0.8rem;
+      color: #5d6b63;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
+    }
+
+    .event-actions {
+      margin-top: 0.4rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .delete-btn {
+      border: 1px solid #f0c9c2;
+      color: #8f352d;
+      background: #fff6f4;
+      padding: 0.28rem 0.48rem;
+      font-size: 0.72rem;
+      border-radius: 8px;
+    }
+
+    .empty-state {
+      color: #68766f;
+      font-size: 0.86rem;
+      border: 1px dashed #b9c5be;
+      border-radius: 10px;
+      padding: 0.7rem;
+      background: #f8fbf9;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 32, 27, 0.44);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      z-index: 50;
+    }
+
+    .modal-card {
+      width: min(700px, 100%);
+      background: #fffdf8;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: rise 0.28s ease;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border);
+      background: #f6efe3;
+    }
+
+    .modal-head h4 {
+      font-family: "Sora", sans-serif;
+      font-size: 1rem;
+    }
+
+    .close-btn {
+      border: 1px solid #dbc7b0;
+      color: #5f4f3f;
+      background: #fff7ed;
+      padding: 0.35rem 0.6rem;
+    }
+
+    form {
+      padding: 0.95rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.82rem;
+      color: #526257;
+      font-weight: 700;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid #cfc5b2;
+      border-radius: 9px;
+      padding: 0.56rem 0.62rem;
+      font: inherit;
+      background: #fff;
+      color: #223028;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.55rem;
+      margin-top: 0.2rem;
+    }
+
+    .btn-muted {
+      border: 1px solid #d3c7b5;
+      background: #fff7eb;
+      color: #5e5445;
+      padding: 0.54rem 0.8rem;
+    }
+
+    .btn-primary {
+      border: 1px solid #264636;
+      background: var(--brand);
+      color: #f2fff6;
+      padding: 0.54rem 0.88rem;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+
+      .planner-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .calendar-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .dow {
+        display: none;
+      }
+
+      form {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="headline">
+        <div>
+          <h1>USA EDC 2026 Collaborative Planner</h1>
+          <p>Calendar view, day zoom, AM/PM board, and conflict-aware logistics planning.</p>
+        </div>
+        <div class="top-links">
+          <a href="index.html">Accommodation</a>
+          <a href="expenses.html">Expenses</a>
+          <button id="todayButton" type="button">Go to Today</button>
+        </div>
+      </div>
+      <div class="status-strip" id="statusStrip"></div>
+    </header>
+
+    <div class="content">
+      <aside class="panel">
+        <h2>Legend</h2>
+        <div class="legend-item"><span class="legend-color lc-flight"></span> Flight</div>
+        <div class="legend-item"><span class="legend-color lc-stay"></span> Hotel / Airbnb</div>
+        <div class="legend-item"><span class="legend-color lc-transport"></span> Car / Transfer</div>
+        <div class="legend-item"><span class="legend-color lc-event"></span> Festival / Main event</div>
+        <div class="legend-item"><span class="legend-color lc-custom"></span> Added by group</div>
+        <button id="exportButton" type="button">Export Added Activities</button>
+      </aside>
+
+      <section class="view-shell">
+        <div class="view-switch">
+          <div class="view-tabs">
+            <button class="active" data-view="calendar" type="button">Calendar</button>
+            <button data-view="day" type="button">Day Zoom</button>
+          </div>
+          <div class="date-jump">
+            <label for="daySelect">Zoom date</label>
+            <select id="daySelect"></select>
+          </div>
+        </div>
+
+        <div id="calendarView">
+          <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+
+        <div id="dayView" class="hidden">
+          <div class="day-head">
+            <div>
+              <h3 id="dayTitle">Day details</h3>
+              <p id="daySubTitle"></p>
+            </div>
+            <div class="danger-box" id="conflictBox">No heavy logistics pressure in this day yet.</div>
+          </div>
+          <div class="planner-grid">
+            <section class="planner-column">
+              <header>
+                <strong>AM Plan</strong>
+                <div class="col-meta" id="amMeta"></div>
+              </header>
+              <button class="add-btn" type="button" id="addAmButton">+ Add AM Activity</button>
+              <ul class="event-list" id="amList"></ul>
+            </section>
+
+            <section class="planner-column">
+              <header>
+                <strong>PM Plan</strong>
+                <div class="col-meta" id="pmMeta"></div>
+              </header>
+              <button class="add-btn" type="button" id="addPmButton">+ Add PM Activity</button>
+              <ul class="event-list" id="pmList"></ul>
+            </section>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="activityModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h4>Add Activity</h4>
+        <button type="button" class="close-btn" id="closeModalBtn">Close</button>
+      </div>
+      <form id="activityForm">
+        <div class="field full">
+          <label for="activityTitle">Activity title</label>
+          <input id="activityTitle" name="title" required maxlength="120" placeholder="Example: EDC shuttle queue" />
+        </div>
+
+        <div class="field">
+          <label for="activityDate">Date</label>
+          <input id="activityDate" name="date" type="date" required />
+        </div>
+
+        <div class="field">
+          <label for="activityPeriod">AM or PM</label>
+          <select id="activityPeriod" name="period" required>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="activityTime">Time</label>
+          <input id="activityTime" name="time" type="text" maxlength="40" placeholder="9:45 AM" />
+        </div>
+
+        <div class="field">
+          <label for="activityDuration">Duration</label>
+          <input id="activityDuration" name="duration" type="text" maxlength="60" placeholder="2h 30m" />
+        </div>
+
+        <div class="field">
+          <label for="activityCost">Cost per ticket (AUD)</label>
+          <input id="activityCost" name="cost" type="number" min="0" step="0.01" placeholder="120" />
+        </div>
+
+        <div class="field">
+          <label for="activityLocation">Location</label>
+          <input id="activityLocation" name="location" type="text" maxlength="120" placeholder="Las Vegas Motor Speedway" />
+        </div>
+
+        <div class="field full">
+          <label for="activityNotes">Notes</label>
+          <textarea id="activityNotes" name="notes" maxlength="500" placeholder="Anything everyone should know."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-muted" id="cancelButton">Cancel</button>
+          <button type="submit" class="btn-primary">Add activity</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const PLANNER_START = "2026-05-06";
+    const PLANNER_END = "2026-06-05";
+    const STORAGE_KEY = "usa_edc_2026_custom_activities";
+
+    const fixedEvents = [
+      { id: "f1", date: "2026-05-06", period: "AM", type: "flight", title: "QF93 arrives LAX", time: "7:05 AM", location: "LAX", details: "Arrive from Melbourne" },
+      { id: "f2", date: "2026-05-06", period: "AM", type: "transport", title: "Avis car pickup", time: "9:00 AM", location: "LAX", details: "Rental pickup" },
+      { id: "f3", date: "2026-05-06", period: "PM", type: "stay", title: "Element Anaheim check-in", time: "4:00 PM", location: "Anaheim", details: "Hotel check-in" },
+      { id: "f4", date: "2026-05-07", period: "AM", type: "stay", title: "Element Anaheim check-out", time: "11:00 AM", location: "Anaheim", details: "Checkout" },
+      { id: "f5", date: "2026-05-07", period: "PM", type: "stay", title: "San Diego check-in", time: "4:00 PM", location: "San Diego", details: "Lodging check-in" },
+      { id: "f6", date: "2026-05-09", period: "AM", type: "stay", title: "San Diego check-out", time: "12:00 PM", location: "San Diego", details: "Checkout" },
+      { id: "f7", date: "2026-05-10", period: "PM", type: "stay", title: "Palm Springs check-in", time: "4:00 PM", location: "Palm Springs", details: "Apartment check-in" },
+      { id: "f8", date: "2026-05-13", period: "AM", type: "stay", title: "Palm Springs check-out", time: "11:00 AM", location: "Palm Springs", details: "Checkout" },
+      { id: "f9", date: "2026-05-13", period: "PM", type: "stay", title: "Planet Hollywood check-in", time: "4:00 PM", location: "Las Vegas", details: "Check-in" },
+      { id: "f10", date: "2026-05-15", period: "AM", type: "transport", title: "Avis drop off", time: "9:00 AM", location: "Bellagio area", details: "Rental return" },
+      { id: "f11", date: "2026-05-16", period: "PM", type: "event", title: "EDC Las Vegas", time: "Evening", location: "Las Vegas Motor Speedway", details: "Festival day" },
+      { id: "f12", date: "2026-05-17", period: "PM", type: "event", title: "EDC Las Vegas", time: "Evening", location: "Las Vegas Motor Speedway", details: "Festival day" },
+      { id: "f13", date: "2026-05-18", period: "PM", type: "event", title: "EDC Las Vegas", time: "Evening", location: "Las Vegas Motor Speedway", details: "Festival day" },
+      { id: "f14", date: "2026-05-19", period: "AM", type: "stay", title: "Planet Hollywood check-out", time: "11:00 AM", location: "Las Vegas", details: "Checkout" },
+      { id: "f15", date: "2026-05-19", period: "AM", type: "flight", title: "LAS to ATL", time: "12:34 AM", location: "LAS", details: "Delta DL857" },
+      { id: "f16", date: "2026-05-19", period: "AM", type: "flight", title: "ATL to CUN", time: "8:15 AM", location: "ATL", details: "Delta DL1964" },
+      { id: "f17", date: "2026-05-19", period: "PM", type: "stay", title: "Cancun check-in", time: "4:00 PM", location: "Cancun", details: "Lodging" },
+      { id: "f18", date: "2026-05-24", period: "AM", type: "stay", title: "Cancun check-out", time: "11:00 AM", location: "Cancun", details: "Checkout" },
+      { id: "f19", date: "2026-05-24", period: "AM", type: "flight", title: "CUN to IAH", time: "5:35 AM", location: "CUN", details: "UA1248" },
+      { id: "f20", date: "2026-05-24", period: "AM", type: "transport", title: "Thrifty pickup", time: "9:00 AM", location: "Houston", details: "Car rental" },
+      { id: "f21", date: "2026-05-24", period: "PM", type: "stay", title: "Houston check-in", time: "4:00 PM", location: "Houston", details: "Home2 Suites" },
+      { id: "f22", date: "2026-05-25", period: "AM", type: "stay", title: "Houston check-out", time: "11:00 AM", location: "Houston", details: "Checkout" },
+      { id: "f23", date: "2026-05-25", period: "PM", type: "stay", title: "Lafayette Airbnb check-in", time: "4:00 PM", location: "Lafayette", details: "Lodging" },
+      { id: "f24", date: "2026-05-26", period: "AM", type: "stay", title: "Lafayette Airbnb check-out", time: "11:00 AM", location: "Lafayette", details: "Checkout" },
+      { id: "f25", date: "2026-05-26", period: "PM", type: "stay", title: "Prince Conti check-in", time: "4:00 PM", location: "New Orleans", details: "Hotel" },
+      { id: "f26", date: "2026-05-28", period: "AM", type: "stay", title: "Prince Conti check-out", time: "11:00 AM", location: "New Orleans", details: "Checkout" },
+      { id: "f27", date: "2026-05-28", period: "PM", type: "stay", title: "Nashville Airbnb check-in", time: "3:00 PM", location: "Nashville", details: "Lodging" },
+      { id: "f28", date: "2026-05-30", period: "AM", type: "stay", title: "Nashville Airbnb check-out", time: "11:00 AM", location: "Nashville", details: "Checkout" },
+      { id: "f29", date: "2026-05-30", period: "AM", type: "transport", title: "Thrifty drop off", time: "8:00 AM", location: "Nashville Airport", details: "Rental return" },
+      { id: "f30", date: "2026-05-30", period: "AM", type: "flight", title: "BNA to ORD", time: "9:00 AM", location: "BNA", details: "AA3973 (conflict flagged)" },
+      { id: "f31", date: "2026-05-30", period: "PM", type: "stay", title: "Chicago Airbnb check-in", time: "4:00 PM", location: "Chicago", details: "Check-in" },
+      { id: "f32", date: "2026-06-03", period: "AM", type: "stay", title: "Chicago Airbnb check-out", time: "11:00 AM", location: "Chicago", details: "Checkout" },
+      { id: "f33", date: "2026-06-03", period: "PM", type: "flight", title: "ORD to LAX", time: "3:20 PM", location: "ORD", details: "AA529" },
+      { id: "f34", date: "2026-06-03", period: "PM", type: "flight", title: "LAX to MEL", time: "9:45 PM", location: "LAX", details: "QF94" }
+    ];
+
+    let selectedDate = PLANNER_START;
+    let selectedView = "calendar";
+
+    const statusStrip = document.getElementById("statusStrip");
+    const calendarGrid = document.getElementById("calendarGrid");
+    const daySelect = document.getElementById("daySelect");
+    const dayTitle = document.getElementById("dayTitle");
+    const daySubTitle = document.getElementById("daySubTitle");
+    const amMeta = document.getElementById("amMeta");
+    const pmMeta = document.getElementById("pmMeta");
+    const amList = document.getElementById("amList");
+    const pmList = document.getElementById("pmList");
+    const conflictBox = document.getElementById("conflictBox");
+    const calendarView = document.getElementById("calendarView");
+    const dayView = document.getElementById("dayView");
+
+    const modal = document.getElementById("activityModal");
+    const activityForm = document.getElementById("activityForm");
+
+    function toDate(value) {
+      return new Date(value + "T00:00:00");
+    }
+
+    function formatDate(value) {
+      return toDate(value).toLocaleDateString(undefined, {
+        weekday: "short",
+        day: "numeric",
+        month: "short"
+      });
+    }
+
+    function formatFullDate(value) {
+      return toDate(value).toLocaleDateString(undefined, {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+    }
+
+    function getDateRange(startDate, endDate) {
+      const list = [];
+      const current = toDate(startDate);
+      const end = toDate(endDate);
+
+      while (current <= end) {
+        const iso = current.toISOString().slice(0, 10);
+        list.push(iso);
+        current.setDate(current.getDate() + 1);
+      }
+
+      return list;
+    }
+
+    function readCustomEvents() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        return [];
+      }
+
+      try {
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveCustomEvents(events) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
+    }
+
+    function allEvents() {
+      return [...fixedEvents, ...readCustomEvents()];
+    }
+
+    function isLogisticsEvent(item) {
+      return ["flight", "transport", "stay"].includes(item.type);
+    }
+
+    function eventsForDate(date, period) {
+      return allEvents().filter((item) => item.date === date && (!period || item.period === period));
+    }
+
+    function fixedLoad(date, period) {
+      return fixedEvents.filter((item) => item.date === date && item.period === period && isLogisticsEvent(item)).length;
+    }
+
+    function conflictText(date) {
+      const amLoad = fixedLoad(date, "AM");
+      const pmLoad = fixedLoad(date, "PM");
+      const total = amLoad + pmLoad;
+
+      if (total >= 4 || amLoad >= 3 || pmLoad >= 3) {
+        return "High logistics pressure. Plan extra transfer time.";
+      }
+
+      if (total >= 2) {
+        return "Medium logistics pressure. Keep added activities close by.";
+      }
+
+      return "Low logistics pressure. This day has room to add plans.";
+    }
+
+    function daySummaryPills() {
+      const dates = getDateRange(PLANNER_START, PLANNER_END);
+      const custom = readCustomEvents().length;
+      const highPressureDays = dates.filter((d) => {
+        const total = fixedLoad(d, "AM") + fixedLoad(d, "PM");
+        return total >= 3;
+      }).length;
+
+      const festivalDays = fixedEvents.filter((e) => e.type === "event").length;
+
+      return [
+        "Trip window: " + formatDate(PLANNER_START) + " to " + formatDate(PLANNER_END),
+        "Fixed itinerary items: " + fixedEvents.length,
+        "Group-added activities: " + custom,
+        "EDC blocks: " + festivalDays,
+        "High-pressure logistics days: " + highPressureDays
+      ];
+    }
+
+    function renderStatusStrip() {
+      statusStrip.innerHTML = daySummaryPills().map((text) => `<span class="pill">${text}</span>`).join("");
+    }
+
+    function eventTypeClass(type) {
+      return "chip-" + (type || "custom");
+    }
+
+    function eventTypeText(type) {
+      const map = {
+        flight: "Flight",
+        stay: "Stay",
+        transport: "Transport",
+        event: "Event",
+        custom: "Custom"
+      };
+
+      return map[type] || "Custom";
+    }
+
+    function renderCalendar() {
+      const dates = getDateRange(PLANNER_START, PLANNER_END);
+      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const dayHeader = days.map((d) => `<div class="dow">${d}</div>`).join("");
+
+      const cards = dates.map((date) => {
+        const dayEvents = eventsForDate(date);
+        const chips = dayEvents
+          .slice(0, 3)
+          .map((item) => `<span class="small-chip ${eventTypeClass(item.type)}">${item.title}</span>`)
+          .join("");
+        const overflow = dayEvents.length > 3 ? `<span class="small-chip chip-custom">+${dayEvents.length - 3} more</span>` : "";
+        const heavy = fixedLoad(date, "AM") + fixedLoad(date, "PM") >= 3;
+        const conflict = heavy ? `<span class="conflict-dot">Heavy logistics</span>` : "";
+        const classes = "day-card" + (date === selectedDate ? " selected" : "");
+
+        return `
+          <button class="${classes}" data-date="${date}" type="button">
+            <div style="display:flex; align-items:center; gap:0.4rem;">
+              <span class="date-label">${formatDate(date)}</span>
+              ${conflict}
+            </div>
+            <div>${chips}${overflow || "<span class='small-chip chip-custom'>No events yet</span>"}</div>
+          </button>
+        `;
+      }).join("");
+
+      calendarGrid.innerHTML = dayHeader + cards;
+
+      document.querySelectorAll(".day-card").forEach((el) => {
+        el.addEventListener("click", () => {
+          selectedDate = el.dataset.date;
+          daySelect.value = selectedDate;
+          selectedView = "day";
+          renderAll();
+        });
+      });
+    }
+
+    function renderDaySelect() {
+      const dates = getDateRange(PLANNER_START, PLANNER_END);
+      daySelect.innerHTML = dates
+        .map((date) => `<option value="${date}">${formatDate(date)}</option>`)
+        .join("");
+      daySelect.value = selectedDate;
+    }
+
+    function sortByTime(items) {
+      return [...items].sort((a, b) => {
+        const at = (a.time || "").toLowerCase();
+        const bt = (b.time || "").toLowerCase();
+        return at.localeCompare(bt);
+      });
+    }
+
+    function renderEventCard(item) {
+      const cost = item.cost ? `Cost/ticket: AUD ${Number(item.cost).toFixed(2)}` : "";
+      const detailsLine = item.details || item.notes || "";
+
+      return `
+        <li class="event-card type-${item.type || "custom"}">
+          <div class="event-title-row">
+            <div class="event-title">${item.title}</div>
+            <div class="event-time">${item.time || "Time TBD"}</div>
+          </div>
+          <div class="event-meta">
+            <span>Type: ${eventTypeText(item.type || "custom")}</span>
+            <span>${item.location ? "Location: " + item.location : "Location TBD"}</span>
+            <span>${item.duration ? "Duration: " + item.duration : "Duration TBD"}</span>
+            ${cost ? `<span>${cost}</span>` : ""}
+            ${detailsLine ? `<span>${detailsLine}</span>` : ""}
+          </div>
+          ${item.isCustom ? `<div class="event-actions"><button type="button" class="delete-btn" data-delete-id="${item.id}">Delete</button></div>` : ""}
+        </li>
+      `;
+    }
+
+    function renderPeriod(listElement, items) {
+      if (!items.length) {
+        listElement.innerHTML = '<li class="empty-state">No activities in this block yet. Use + Add Activity.</li>';
+        return;
+      }
+
+      listElement.innerHTML = sortByTime(items).map(renderEventCard).join("");
+
+      listElement.querySelectorAll("[data-delete-id]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          removeCustomEvent(btn.dataset.deleteId);
+        });
+      });
+    }
+
+    function renderDay() {
+      const amFixed = fixedLoad(selectedDate, "AM");
+      const pmFixed = fixedLoad(selectedDate, "PM");
+      const summary = conflictText(selectedDate);
+
+      dayTitle.textContent = formatFullDate(selectedDate);
+      daySubTitle.textContent = "AM and PM board with fixed itinerary and group-added activities.";
+      conflictBox.textContent = summary + " AM load: " + amFixed + " | PM load: " + pmFixed + ".";
+
+      amMeta.textContent = amFixed > 0
+        ? "Fixed logistics in AM: " + amFixed + ". Adding more may be tight."
+        : "No fixed logistics in AM.";
+
+      pmMeta.textContent = pmFixed > 0
+        ? "Fixed logistics in PM: " + pmFixed + "."
+        : "No fixed logistics in PM.";
+
+      const mergedAM = eventsForDate(selectedDate, "AM").map((item) => ({ ...item, isCustom: !fixedEvents.some((f) => f.id === item.id) }));
+      const mergedPM = eventsForDate(selectedDate, "PM").map((item) => ({ ...item, isCustom: !fixedEvents.some((f) => f.id === item.id) }));
+
+      renderPeriod(amList, mergedAM);
+      renderPeriod(pmList, mergedPM);
+    }
+
+    function setView(view) {
+      selectedView = view;
+      document.querySelectorAll(".view-tabs button").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.view === selectedView);
+      });
+
+      calendarView.classList.toggle("hidden", selectedView !== "calendar");
+      dayView.classList.toggle("hidden", selectedView !== "day");
+    }
+
+    function openModal(period) {
+      modal.classList.remove("hidden");
+      modal.setAttribute("aria-hidden", "false");
+      document.getElementById("activityDate").value = selectedDate;
+      document.getElementById("activityPeriod").value = period;
+      document.getElementById("activityTitle").focus();
+    }
+
+    function closeModal() {
+      modal.classList.add("hidden");
+      modal.setAttribute("aria-hidden", "true");
+      activityForm.reset();
+    }
+
+    function removeCustomEvent(id) {
+      const next = readCustomEvents().filter((item) => item.id !== id);
+      saveCustomEvents(next);
+      renderAll();
+    }
+
+    function addCustomEvent(payload) {
+      const items = readCustomEvents();
+      items.push({
+        id: "c" + Date.now().toString(36),
+        type: "custom",
+        ...payload
+      });
+      saveCustomEvents(items);
+    }
+
+    function exportCustomActivities() {
+      const custom = readCustomEvents();
+      const blob = new Blob([JSON.stringify(custom, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "usa-edc-2026-activities.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function renderAll() {
+      renderStatusStrip();
+      renderDaySelect();
+      renderCalendar();
+      renderDay();
+      setView(selectedView);
+    }
+
+    document.querySelectorAll(".view-tabs button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setView(btn.dataset.view);
+      });
+    });
+
+    daySelect.addEventListener("change", () => {
+      selectedDate = daySelect.value;
+      renderAll();
+      setView("day");
+    });
+
+    document.getElementById("addAmButton").addEventListener("click", () => openModal("AM"));
+    document.getElementById("addPmButton").addEventListener("click", () => openModal("PM"));
+    document.getElementById("closeModalBtn").addEventListener("click", closeModal);
+    document.getElementById("cancelButton").addEventListener("click", closeModal);
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    activityForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = new FormData(activityForm);
+      const payload = {
+        title: String(formData.get("title") || "").trim(),
+        date: String(formData.get("date") || "").trim(),
+        period: String(formData.get("period") || "AM"),
+        time: String(formData.get("time") || "").trim(),
+        duration: String(formData.get("duration") || "").trim(),
+        cost: String(formData.get("cost") || "").trim(),
+        location: String(formData.get("location") || "").trim(),
+        notes: String(formData.get("notes") || "").trim()
+      };
+
+      if (!payload.title || !payload.date) {
+        return;
+      }
+
+      addCustomEvent(payload);
+      selectedDate = payload.date;
+      closeModal();
+      setView("day");
+      renderAll();
+    });
+
+    document.getElementById("todayButton").addEventListener("click", () => {
+      const today = new Date().toISOString().slice(0, 10);
+      if (today >= PLANNER_START && today <= PLANNER_END) {
+        selectedDate = today;
+      } else {
+        selectedDate = PLANNER_START;
+      }
+      selectedView = "day";
+      renderAll();
+    });
+
+    document.getElementById("exportButton").addEventListener("click", exportCustomActivities);
+
+    renderAll();
+  </script>
+</body>
+</html>
