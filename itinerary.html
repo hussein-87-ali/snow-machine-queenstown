@@ -662,6 +662,11 @@
         <div class="legend-item"><span class="legend-color lc-transport"></span> Car / Transfer</div>
         <div class="legend-item"><span class="legend-color lc-event"></span> Festival / Main event</div>
         <div class="legend-item"><span class="legend-color lc-custom"></span> Added by group</div>
+
+        <h2 style="margin-top: 1.2rem;">📋 Bookings To-Do</h2>
+        <div id="bookingsList" style="font-size: 0.85rem; color: var(--muted); max-height: 180px; overflow-y: auto;"></div>
+        <input id="bookingInput" type="text" placeholder="Add booking..." style="width: 100%; font-size: 0.8rem; margin-top: 0.5rem;" />
+
         <button id="exportButton" type="button">Export Added Activities</button>
       </aside>
 
@@ -917,6 +922,68 @@
       return "Low logistics pressure. This day has room to add plans.";
     }
 
+    const BOOKINGS_KEY = "usa_edc_2026_bookings";
+
+    function readBookings() {
+      const raw = localStorage.getItem(BOOKINGS_KEY);
+      if (!raw) return [];
+      try {
+        return JSON.parse(raw);
+      } catch {
+        return [];
+      }
+    }
+
+    function saveBookings(bookings) {
+      localStorage.setItem(BOOKINGS_KEY, JSON.stringify(bookings));
+    }
+
+    function renderBookings() {
+      const bookings = readBookings();
+      const bookingsList = document.getElementById("bookingsList");
+
+      if (!bookings.length) {
+        bookingsList.innerHTML = '<div style="color: #888; font-size: 0.8rem; padding: 0.5rem 0;">No bookings yet.</div>';
+        return;
+      }
+
+      bookingsList.innerHTML = bookings
+        .map((booking) => `
+          <div style="display: flex; gap: 0.5rem; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid #eee;">
+            <input type="checkbox" ${booking.done ? 'checked' : ''} onchange="toggleBooking('${booking.id}')" style="cursor: pointer;" />
+            <span style="flex: 1; text-decoration: ${booking.done ? 'line-through; color: #aaa;' : 'none'};">${booking.text}</span>
+            <button onclick="deleteBooking('${booking.id}')" style="border: none; background: none; color: #b85450; cursor: pointer; font-size: 0.7rem; padding: 0;">×</button>
+          </div>
+        `)
+        .join("");
+    }
+
+    function addBooking(text) {
+      if (!text.trim()) return;
+      const bookings = readBookings();
+      bookings.push({
+        id: "b" + Date.now().toString(36),
+        text: text.trim(),
+        done: false
+      });
+      saveBookings(bookings);
+      renderBookings();
+    }
+
+    function toggleBooking(id) {
+      const bookings = readBookings();
+      const booking = bookings.find((b) => b.id === id);
+      if (booking) booking.done = !booking.done;
+      saveBookings(bookings);
+      renderBookings();
+    }
+
+    function deleteBooking(id) {
+      const bookings = readBookings().filter((b) => b.id !== id);
+      saveBookings(bookings);
+      renderBookings();
+    }
+
     function daySummaryPills() {
       const dates = getDateRange(PLANNER_START, PLANNER_END);
       const custom = readCustomEvents().length;
@@ -1133,6 +1200,7 @@
       renderDaySelect();
       renderCalendar();
       renderDay();
+      renderBookings();
       setView(selectedView);
     }
 
@@ -1196,6 +1264,13 @@
     });
 
     document.getElementById("exportButton").addEventListener("click", exportCustomActivities);
+
+    document.getElementById("bookingInput").addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        addBooking(e.target.value);
+        e.target.value = "";
+      }
+    });
 
     renderAll();
   </script>
