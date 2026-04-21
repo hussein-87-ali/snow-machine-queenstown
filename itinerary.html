@@ -961,6 +961,9 @@
       const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
       const dayHeader = days.map((d) => `<div class="dow">${d}</div>`).join("");
 
+      const startDayOfWeek = toDate(PLANNER_START).getDay();
+      const emptyPrefix = Array(startDayOfWeek).fill('<div></div>').join("");
+
       const cards = dates.map((date) => {
         const dayEvents = eventsForDate(date);
         const chips = dayEvents
@@ -983,7 +986,7 @@
         `;
       }).join("");
 
-      calendarGrid.innerHTML = dayHeader + cards;
+      calendarGrid.innerHTML = dayHeader + emptyPrefix + cards;
 
       document.querySelectorAll(".day-card").forEach((el) => {
         el.addEventListener("click", () => {
